@@ -1,3 +1,6 @@
+import { Metadata } from 'next'
+import Link from 'next/link'
+
 import { Container, ImageGrid, Title, WaveDivider } from '@/components'
 import {
   Carousel,
@@ -6,13 +9,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { Metadata } from 'next'
-import Link from 'next/link'
 import { dWhoWeAre1, dWhoWeAre2, dWhoWeAre3 } from './_assets'
 import { TestimonialCard, UpcomingEventCard } from './_components'
 import { getTestimonials, getUpcomingEvents } from './_content'
 
 export const metadata: Metadata = { title: 'EYP CY - Home' }
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   const upcomingEvents = await getUpcomingEvents()

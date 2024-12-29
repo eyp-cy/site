@@ -1,18 +1,18 @@
 'use client'
+import { ActionButton, Input, Textarea } from '@/components'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
-import { ActionButton, Input, Textarea } from '@/components'
 
-const formSchema = z.object({
+const contactFormSchema = z.object({
   name: z.string().min(2, 'Please enter a Name'),
   email: z.string().email('Please enter a valid Email'),
   subject: z.string().min(2, 'Please enter a Subject Line'),
   text: z.string().min(2, 'Please enter your Message here'),
 })
 
-type formData = z.infer<typeof formSchema>
+type formData = z.infer<typeof contactFormSchema>
 
 export function ContactForm() {
   const {
@@ -20,7 +20,7 @@ export function ContactForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<formData>({ resolver: zodResolver(formSchema) })
+  } = useForm<formData>({ resolver: zodResolver(contactFormSchema) })
 
   const onSubmit = (data: formData) => {
     const { name, email, subject, text } = data

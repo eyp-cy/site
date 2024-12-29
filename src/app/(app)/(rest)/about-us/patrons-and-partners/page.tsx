@@ -4,6 +4,7 @@ import { PartnerCard, PatronCard } from './_components'
 import { getPartners, getPatrons } from './_content'
 
 export const metadata: Metadata = { title: 'Patrons & Partners' }
+export const dynamic = 'force-dynamic'
 
 export default async function PatronsAndPartners() {
   const patrons = await getPatrons()

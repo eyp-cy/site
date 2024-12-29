@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
+
 import { Container, Title } from '@/components'
 import { NCMemberCard, PreviousBoardButton } from './_components'
 import { getCurrentNCMembers, getPreviousNCs } from './_content'
 
 export const metadata: Metadata = { title: 'National Committee' }
+export const dynamic = 'force-dynamic'
 
 export default async function NationalCommittee() {
   const nc = await getCurrentNCMembers()

@@ -1,5 +1,6 @@
-import { Dialog, DialogContent, DialogHeader, DialogTrigger, Title } from '@/components'
 import { Nc } from 'payload-types'
+
+import { Dialog, DialogContent, DialogHeader, DialogTrigger, Title } from '@/components'
 import { extractMembers } from '../_content'
 
 export function PreviousBoardButton({ nc }: { nc: Nc }) {

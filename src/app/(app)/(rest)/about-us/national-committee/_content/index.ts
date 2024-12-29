@@ -26,7 +26,6 @@ export async function getPreviousNCs() {
     sort: '-year',
   })
 
-  const hello = ncs.docs.flatMap(extractMembers)
   return ncs.docs
 }
 

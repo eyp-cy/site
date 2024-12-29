@@ -1,8 +1,6 @@
-import Image from 'next/image'
-import type { ReactNode } from 'react'
-import { TestimonialDetails } from '../_content/testimonials'
-import { Testimonial } from 'payload-types'
 import { toImageUrl } from '@/lib/to-image-url'
+import Image from 'next/image'
+import { Testimonial } from 'payload-types'
 
 function QuoteIcon({ className }: { className: string }) {
   return (
