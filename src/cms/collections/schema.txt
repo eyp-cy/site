@@ -1,0 +1,59 @@
+model Event {
+
+    @id             string
+    title           string
+    description     string
+    startDate       DateTime
+    endDate         DateTime?
+    href            string
+    image           Blob
+
+    actionText      String?
+}
+
+
+model NC {
+
+    @@id[ year, nc_memberId ]
+    year            number
+    nc_memberId     string
+}
+
+
+model NC_Member {
+
+    @id             string
+    fullName        string
+    position        string
+    quote           string?
+    image           Blob
+}
+
+
+model Patron {
+    
+    @id             string
+    qualifier       string
+    fullName        string
+    title           string
+    image           Blob
+    domain          EU || CY
+}
+
+
+model Partner {
+
+    @id             string
+    name            string
+    image           Blob
+}
+
+
+mode Testimonial {
+
+    @id                 string
+    quote               string
+    author_fullName     string
+    author_description  string
+    author_image        Blob
+}
