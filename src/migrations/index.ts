@@ -1,10 +1,9 @@
-import * as migration_20241227_145541_initial from './20241227_145541_initial';
-import * as migration_20241227_154913_initial_collections from './20241227_154913_initial_collections';
-import * as migration_20241227_155005_nc_member_relation from './20241227_155005_nc_member_relation';
-import * as migration_20241227_155222_nc_collection_labels from './20241227_155222_nc_collection_labels';
-import * as migration_20241227_155318_nc_collection_labels_2 from './20241227_155318_nc_collection_labels_2';
-import * as migration_20241227_162121_optional_event_actions from './20241227_162121_optional_event_actions';
-import * as migration_20241228_142513_mandatory_nc_members from './20241228_142513_mandatory_nc_members';
+import * as migration_20241227_145541_initial from './20241227_145541_initial'
+import * as migration_20241227_154913_initial_collections from './20241227_154913_initial_collections'
+import * as migration_20241227_155005_nc_member_relation from './20241227_155005_nc_member_relation'
+import * as migration_20241229_175611_complex_events from './20241229_175611_complex_events'
+import * as migration_20241229_180219_session_elements from './20241229_180219_session_elements'
+import * as migration_20241229_180322_connect_session_elements from './20241229_180322_connect_session_elements'
 
 export const migrations = [
   {
@@ -23,23 +22,18 @@ export const migrations = [
     name: '20241227_155005_nc_member_relation',
   },
   {
-    up: migration_20241227_155222_nc_collection_labels.up,
-    down: migration_20241227_155222_nc_collection_labels.down,
-    name: '20241227_155222_nc_collection_labels',
+    up: migration_20241229_175611_complex_events.up,
+    down: migration_20241229_175611_complex_events.down,
+    name: '20241229_175611_complex_events',
   },
   {
-    up: migration_20241227_155318_nc_collection_labels_2.up,
-    down: migration_20241227_155318_nc_collection_labels_2.down,
-    name: '20241227_155318_nc_collection_labels_2',
+    up: migration_20241229_180219_session_elements.up,
+    down: migration_20241229_180219_session_elements.down,
+    name: '20241229_180219_session_elements',
   },
   {
-    up: migration_20241227_162121_optional_event_actions.up,
-    down: migration_20241227_162121_optional_event_actions.down,
-    name: '20241227_162121_optional_event_actions',
+    up: migration_20241229_180322_connect_session_elements.up,
+    down: migration_20241229_180322_connect_session_elements.down,
+    name: '20241229_180322_connect_session_elements',
   },
-  {
-    up: migration_20241228_142513_mandatory_nc_members.up,
-    down: migration_20241228_142513_mandatory_nc_members.down,
-    name: '20241228_142513_mandatory_nc_members'
-  },
-];
+]

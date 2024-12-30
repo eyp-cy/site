@@ -1,4 +1,5 @@
 import path from 'path'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import {
@@ -31,6 +32,7 @@ import { TestimonialCollection } from '@/cms/collections/testimonial'
 import { MediaCollection } from '@/cms/collections/media'
 import { PagesCollection } from '@/cms/collections/pages'
 import { UserCollection } from '@/cms/collections/user'
+import { SessionElementCollection } from '@/cms/collections/session-element'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,7 +51,18 @@ export default buildConfig({
     NC_Collection,
     PartnerCollection,
     PatronCollection,
+    SessionElementCollection,
     TestimonialCollection,
+  ],
+  plugins: [
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+        'media-with-prefix': { prefix: 'eyp-cy-cms' },
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

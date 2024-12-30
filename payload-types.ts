@@ -19,6 +19,7 @@ export interface Config {
     nc: Nc;
     partner: Partner;
     patron: Patron;
+    sessionElement: SessionElement;
     testimonials: Testimonial;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -119,15 +120,35 @@ export interface Media {
 export interface Event {
   id: number;
   title: string;
-  description: string;
+  longDescription?: string | null;
+  shortDescription: string;
   startDate: string;
   endDate?: string | null;
   url?: string | null;
-  image: number | Media;
+  logo?: (number | null) | Media;
+  cardImage: number | Media;
   actionText?: string | null;
   actionUrl?: string | null;
   active?: boolean | null;
+  sessionElements?:
+    | {
+        sessionElement?: (number | SessionElement)[] | null;
+        id?: string | null;
+      }[]
+    | null;
   slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sessionElement".
+ */
+export interface SessionElement {
+  id: number;
+  title: string;
+  description: string;
+  image: number | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -236,6 +257,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'patron';
         value: number | Patron;
+      } | null)
+    | ({
+        relationTo: 'sessionElement';
+        value: number | SessionElement;
       } | null)
     | ({
         relationTo: 'testimonials';

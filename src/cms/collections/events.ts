@@ -19,7 +19,12 @@ export const EventCollection: CollectionConfig = {
       required: true,
     },
     {
-      name: 'description',
+      name: 'longDescription',
+      type: 'textarea',
+      required: false,
+    },
+    {
+      name: 'shortDescription',
       type: 'textarea',
       required: true,
     },
@@ -39,7 +44,13 @@ export const EventCollection: CollectionConfig = {
       required: false,
     },
     {
-      name: 'image',
+      name: 'logo',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
+      name: 'cardImage',
       type: 'upload',
       relationTo: 'media',
       required: true,
@@ -58,6 +69,19 @@ export const EventCollection: CollectionConfig = {
       name: 'active',
       type: 'checkbox',
       required: false,
+    },
+    {
+      name: 'sessionElements',
+      type: 'array',
+      fields: [
+        {
+          name: 'sessionElement',
+          type: 'relationship',
+          relationTo: 'sessionElement',
+          hasMany: true,
+          required: false,
+        },
+      ],
     },
     {
       name: 'slug',

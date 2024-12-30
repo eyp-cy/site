@@ -1,5 +1,5 @@
 {
-  "id": "864029bb-d726-4b53-805a-e9da888e4930",
+  "id": "c01945c8-704f-4c52-aa6f-0d907a4fc78b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -303,8 +303,14 @@
           "primaryKey": false,
           "notNull": true
         },
-        "description": {
-          "name": "description",
+        "long_description": {
+          "name": "long_description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "short_description": {
+          "name": "short_description",
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
@@ -327,8 +333,14 @@
           "primaryKey": false,
           "notNull": false
         },
-        "image_id": {
-          "name": "image_id",
+        "logo_id": {
+          "name": "logo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "card_image_id": {
+          "name": "card_image_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -390,12 +402,25 @@
         }
       },
       "foreignKeys": {
-        "events_image_id_media_id_fk": {
-          "name": "events_image_id_media_id_fk",
+        "events_logo_id_media_id_fk": {
+          "name": "events_logo_id_media_id_fk",
           "tableFrom": "events",
           "tableTo": "media",
           "columnsFrom": [
-            "image_id"
+            "logo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "events_card_image_id_media_id_fk": {
+          "name": "events_card_image_id_media_id_fk",
+          "tableFrom": "events",
+          "tableTo": "media",
+          "columnsFrom": [
+            "card_image_id"
           ],
           "columnsTo": [
             "id"

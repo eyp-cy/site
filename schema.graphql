@@ -1,27 +1,59 @@
 type Query {
-  User(id: String!, draft: Boolean): User
+  User(id: Int!, draft: Boolean): User
   Users(draft: Boolean, where: User_where, limit: Int, page: Int, sort: String): Users
   countUsers(draft: Boolean, where: User_where): countUsers
-  docAccessUser(id: String!): usersDocAccess
+  docAccessUser(id: Int!): usersDocAccess
   meUser: usersMe
   initializedUser: Boolean
-  Page(id: String!, draft: Boolean): Page
+  Page(id: Int!, draft: Boolean): Page
   Pages(draft: Boolean, where: Page_where, limit: Int, page: Int, sort: String): Pages
   countPages(draft: Boolean, where: Page_where): countPages
-  docAccessPage(id: String!): pagesDocAccess
-  Media(id: String!, draft: Boolean): Media
+  docAccessPage(id: Int!): pagesDocAccess
+  Media(id: Int!, draft: Boolean): Media
   allMedia(draft: Boolean, where: Media_where, limit: Int, page: Int, sort: String): allMedia
   countallMedia(draft: Boolean, where: Media_where): countallMedia
-  docAccessMedia(id: String!): mediaDocAccess
-  PayloadPreference(id: String!, draft: Boolean): PayloadPreference
+  docAccessMedia(id: Int!): mediaDocAccess
+  Event(id: Int!, draft: Boolean): Event
+  Events(draft: Boolean, where: Event_where, limit: Int, page: Int, sort: String): Events
+  countEvents(draft: Boolean, where: Event_where): countEvents
+  docAccessEvent(id: Int!): eventsDocAccess
+  Nc_member(id: Int!, draft: Boolean): Nc_member
+  Nc_members(draft: Boolean, where: Nc_member_where, limit: Int, page: Int, sort: String): Nc_members
+  countNc_members(draft: Boolean, where: Nc_member_where): countNc_members
+  docAccessNc_member(id: Int!): nc_memberDocAccess
+  Nc(id: Int!, draft: Boolean): Nc
+  Ncs(draft: Boolean, where: Nc_where, limit: Int, page: Int, sort: String): Ncs
+  countNcs(draft: Boolean, where: Nc_where): countNcs
+  docAccessNc(id: Int!): ncDocAccess
+  Partner(id: Int!, draft: Boolean): Partner
+  Partners(draft: Boolean, where: Partner_where, limit: Int, page: Int, sort: String): Partners
+  countPartners(draft: Boolean, where: Partner_where): countPartners
+  docAccessPartner(id: Int!): partnerDocAccess
+  Patron(id: Int!, draft: Boolean): Patron
+  Patrons(draft: Boolean, where: Patron_where, limit: Int, page: Int, sort: String): Patrons
+  countPatrons(draft: Boolean, where: Patron_where): countPatrons
+  docAccessPatron(id: Int!): patronDocAccess
+  SessionElement(id: Int!, draft: Boolean): SessionElement
+  SessionElements(draft: Boolean, where: SessionElement_where, limit: Int, page: Int, sort: String): SessionElements
+  countSessionElements(draft: Boolean, where: SessionElement_where): countSessionElements
+  docAccessSessionElement(id: Int!): sessionElementDocAccess
+  Testimonial(id: Int!, draft: Boolean): Testimonial
+  Testimonials(draft: Boolean, where: Testimonial_where, limit: Int, page: Int, sort: String): Testimonials
+  countTestimonials(draft: Boolean, where: Testimonial_where): countTestimonials
+  docAccessTestimonial(id: Int!): testimonialsDocAccess
+  PayloadLockedDocument(id: Int!, draft: Boolean): PayloadLockedDocument
+  PayloadLockedDocuments(draft: Boolean, where: PayloadLockedDocument_where, limit: Int, page: Int, sort: String): PayloadLockedDocuments
+  countPayloadLockedDocuments(draft: Boolean, where: PayloadLockedDocument_where): countPayloadLockedDocuments
+  docAccessPayloadLockedDocument(id: Int!): payload_locked_documentsDocAccess
+  PayloadPreference(id: Int!, draft: Boolean): PayloadPreference
   PayloadPreferences(draft: Boolean, where: PayloadPreference_where, limit: Int, page: Int, sort: String): PayloadPreferences
   countPayloadPreferences(draft: Boolean, where: PayloadPreference_where): countPayloadPreferences
-  docAccessPayloadPreference(id: String!): payload_preferencesDocAccess
+  docAccessPayloadPreference(id: Int!): payload_preferencesDocAccess
   Access: Access
 }
 
 type User {
-  id: String
+  id: Int!
   updatedAt: DateTime
   createdAt: DateTime
   email: EmailAddress!
@@ -100,13 +132,12 @@ input User_email_operator {
 }
 
 input User_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
   exists: Boolean
 }
 
@@ -273,12 +304,13 @@ type UsersUnlockDocAccess {
 type usersMe {
   collection: String
   exp: Int
+  strategy: String
   token: String
   user: User
 }
 
 type Page {
-  id: String
+  id: Int!
   title: String
   content(depth: Int): JSON
   updatedAt: DateTime
@@ -356,13 +388,12 @@ input Page_createdAt_operator {
 }
 
 input Page_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
   exists: Boolean
 }
 
@@ -518,7 +549,7 @@ type PagesDeleteDocAccess {
 }
 
 type Media {
-  id: String
+  id: Int!
   text: String
   updatedAt: DateTime
   createdAt: DateTime
@@ -693,13 +724,12 @@ input Media_focalY_operator {
 }
 
 input Media_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
   exists: Boolean
 }
 
@@ -1062,8 +1092,2716 @@ type MediaDeleteDocAccess {
   where: JSONObject
 }
 
-type PayloadPreference {
+type Event {
+  id: Int!
+  title: String!
+  longDescription: String
+  shortDescription: String!
+  startDate: DateTime!
+  endDate: DateTime
+  url: String
+  logo: Media
+  cardImage: Media!
+  actionText: String
+  actionUrl: String
+  active: Boolean
+  slug: String
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Events {
+  docs: [Event]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Event_where {
+  title: Event_title_operator
+  longDescription: Event_longDescription_operator
+  shortDescription: Event_shortDescription_operator
+  startDate: Event_startDate_operator
+  endDate: Event_endDate_operator
+  url: Event_url_operator
+  logo: Event_logo_operator
+  cardImage: Event_cardImage_operator
+  actionText: Event_actionText_operator
+  actionUrl: Event_actionUrl_operator
+  active: Event_active_operator
+  slug: Event_slug_operator
+  updatedAt: Event_updatedAt_operator
+  createdAt: Event_createdAt_operator
+  id: Event_id_operator
+  AND: [Event_where_and]
+  OR: [Event_where_or]
+}
+
+input Event_title_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Event_longDescription_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input Event_shortDescription_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+}
+
+input Event_startDate_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+}
+
+input Event_endDate_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Event_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Event_logo_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+  exists: Boolean
+}
+
+input Event_cardImage_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input Event_actionText_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Event_actionUrl_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Event_active_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
+input Event_slug_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Event_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Event_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Event_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input Event_where_and {
+  title: Event_title_operator
+  longDescription: Event_longDescription_operator
+  shortDescription: Event_shortDescription_operator
+  startDate: Event_startDate_operator
+  endDate: Event_endDate_operator
+  url: Event_url_operator
+  logo: Event_logo_operator
+  cardImage: Event_cardImage_operator
+  actionText: Event_actionText_operator
+  actionUrl: Event_actionUrl_operator
+  active: Event_active_operator
+  slug: Event_slug_operator
+  updatedAt: Event_updatedAt_operator
+  createdAt: Event_createdAt_operator
+  id: Event_id_operator
+  AND: [Event_where_and]
+  OR: [Event_where_or]
+}
+
+input Event_where_or {
+  title: Event_title_operator
+  longDescription: Event_longDescription_operator
+  shortDescription: Event_shortDescription_operator
+  startDate: Event_startDate_operator
+  endDate: Event_endDate_operator
+  url: Event_url_operator
+  logo: Event_logo_operator
+  cardImage: Event_cardImage_operator
+  actionText: Event_actionText_operator
+  actionUrl: Event_actionUrl_operator
+  active: Event_active_operator
+  slug: Event_slug_operator
+  updatedAt: Event_updatedAt_operator
+  createdAt: Event_createdAt_operator
+  id: Event_id_operator
+  AND: [Event_where_and]
+  OR: [Event_where_or]
+}
+
+type countEvents {
+  totalDocs: Int
+}
+
+type eventsDocAccess {
+  fields: EventsDocAccessFields
+  create: EventsCreateDocAccess
+  read: EventsReadDocAccess
+  update: EventsUpdateDocAccess
+  delete: EventsDeleteDocAccess
+}
+
+type EventsDocAccessFields {
+  title: EventsDocAccessFields_title
+  longDescription: EventsDocAccessFields_longDescription
+  shortDescription: EventsDocAccessFields_shortDescription
+  startDate: EventsDocAccessFields_startDate
+  endDate: EventsDocAccessFields_endDate
+  url: EventsDocAccessFields_url
+  logo: EventsDocAccessFields_logo
+  cardImage: EventsDocAccessFields_cardImage
+  actionText: EventsDocAccessFields_actionText
+  actionUrl: EventsDocAccessFields_actionUrl
+  active: EventsDocAccessFields_active
+  slug: EventsDocAccessFields_slug
+  updatedAt: EventsDocAccessFields_updatedAt
+  createdAt: EventsDocAccessFields_createdAt
+}
+
+type EventsDocAccessFields_title {
+  create: EventsDocAccessFields_title_Create
+  read: EventsDocAccessFields_title_Read
+  update: EventsDocAccessFields_title_Update
+  delete: EventsDocAccessFields_title_Delete
+}
+
+type EventsDocAccessFields_title_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_title_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_title_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_title_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_longDescription {
+  create: EventsDocAccessFields_longDescription_Create
+  read: EventsDocAccessFields_longDescription_Read
+  update: EventsDocAccessFields_longDescription_Update
+  delete: EventsDocAccessFields_longDescription_Delete
+}
+
+type EventsDocAccessFields_longDescription_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_longDescription_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_longDescription_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_longDescription_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_shortDescription {
+  create: EventsDocAccessFields_shortDescription_Create
+  read: EventsDocAccessFields_shortDescription_Read
+  update: EventsDocAccessFields_shortDescription_Update
+  delete: EventsDocAccessFields_shortDescription_Delete
+}
+
+type EventsDocAccessFields_shortDescription_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_shortDescription_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_shortDescription_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_shortDescription_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_startDate {
+  create: EventsDocAccessFields_startDate_Create
+  read: EventsDocAccessFields_startDate_Read
+  update: EventsDocAccessFields_startDate_Update
+  delete: EventsDocAccessFields_startDate_Delete
+}
+
+type EventsDocAccessFields_startDate_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_startDate_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_startDate_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_startDate_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_endDate {
+  create: EventsDocAccessFields_endDate_Create
+  read: EventsDocAccessFields_endDate_Read
+  update: EventsDocAccessFields_endDate_Update
+  delete: EventsDocAccessFields_endDate_Delete
+}
+
+type EventsDocAccessFields_endDate_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_endDate_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_endDate_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_endDate_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_url {
+  create: EventsDocAccessFields_url_Create
+  read: EventsDocAccessFields_url_Read
+  update: EventsDocAccessFields_url_Update
+  delete: EventsDocAccessFields_url_Delete
+}
+
+type EventsDocAccessFields_url_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_url_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_url_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_url_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_logo {
+  create: EventsDocAccessFields_logo_Create
+  read: EventsDocAccessFields_logo_Read
+  update: EventsDocAccessFields_logo_Update
+  delete: EventsDocAccessFields_logo_Delete
+}
+
+type EventsDocAccessFields_logo_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_logo_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_logo_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_logo_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_cardImage {
+  create: EventsDocAccessFields_cardImage_Create
+  read: EventsDocAccessFields_cardImage_Read
+  update: EventsDocAccessFields_cardImage_Update
+  delete: EventsDocAccessFields_cardImage_Delete
+}
+
+type EventsDocAccessFields_cardImage_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_cardImage_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_cardImage_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_cardImage_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionText {
+  create: EventsDocAccessFields_actionText_Create
+  read: EventsDocAccessFields_actionText_Read
+  update: EventsDocAccessFields_actionText_Update
+  delete: EventsDocAccessFields_actionText_Delete
+}
+
+type EventsDocAccessFields_actionText_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionText_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionText_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionText_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionUrl {
+  create: EventsDocAccessFields_actionUrl_Create
+  read: EventsDocAccessFields_actionUrl_Read
+  update: EventsDocAccessFields_actionUrl_Update
+  delete: EventsDocAccessFields_actionUrl_Delete
+}
+
+type EventsDocAccessFields_actionUrl_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionUrl_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionUrl_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_actionUrl_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_active {
+  create: EventsDocAccessFields_active_Create
+  read: EventsDocAccessFields_active_Read
+  update: EventsDocAccessFields_active_Update
+  delete: EventsDocAccessFields_active_Delete
+}
+
+type EventsDocAccessFields_active_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_active_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_active_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_active_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_slug {
+  create: EventsDocAccessFields_slug_Create
+  read: EventsDocAccessFields_slug_Read
+  update: EventsDocAccessFields_slug_Update
+  delete: EventsDocAccessFields_slug_Delete
+}
+
+type EventsDocAccessFields_slug_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_slug_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_slug_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_slug_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_updatedAt {
+  create: EventsDocAccessFields_updatedAt_Create
+  read: EventsDocAccessFields_updatedAt_Read
+  update: EventsDocAccessFields_updatedAt_Update
+  delete: EventsDocAccessFields_updatedAt_Delete
+}
+
+type EventsDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_createdAt {
+  create: EventsDocAccessFields_createdAt_Create
+  read: EventsDocAccessFields_createdAt_Read
+  update: EventsDocAccessFields_createdAt_Update
+  delete: EventsDocAccessFields_createdAt_Delete
+}
+
+type EventsDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type EventsDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type EventsCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type EventsReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type EventsUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type EventsDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_member {
+  id: Int!
+  fullName: String!
+  position: String!
+  quote: String
+  image: Media!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Nc_members {
+  docs: [Nc_member]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Nc_member_where {
+  fullName: Nc_member_fullName_operator
+  position: Nc_member_position_operator
+  quote: Nc_member_quote_operator
+  image: Nc_member_image_operator
+  updatedAt: Nc_member_updatedAt_operator
+  createdAt: Nc_member_createdAt_operator
+  id: Nc_member_id_operator
+  AND: [Nc_member_where_and]
+  OR: [Nc_member_where_or]
+}
+
+input Nc_member_fullName_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Nc_member_position_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Nc_member_quote_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input Nc_member_image_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input Nc_member_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Nc_member_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Nc_member_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input Nc_member_where_and {
+  fullName: Nc_member_fullName_operator
+  position: Nc_member_position_operator
+  quote: Nc_member_quote_operator
+  image: Nc_member_image_operator
+  updatedAt: Nc_member_updatedAt_operator
+  createdAt: Nc_member_createdAt_operator
+  id: Nc_member_id_operator
+  AND: [Nc_member_where_and]
+  OR: [Nc_member_where_or]
+}
+
+input Nc_member_where_or {
+  fullName: Nc_member_fullName_operator
+  position: Nc_member_position_operator
+  quote: Nc_member_quote_operator
+  image: Nc_member_image_operator
+  updatedAt: Nc_member_updatedAt_operator
+  createdAt: Nc_member_createdAt_operator
+  id: Nc_member_id_operator
+  AND: [Nc_member_where_and]
+  OR: [Nc_member_where_or]
+}
+
+type countNc_members {
+  totalDocs: Int
+}
+
+type nc_memberDocAccess {
+  fields: Nc_memberDocAccessFields
+  create: Nc_memberCreateDocAccess
+  read: Nc_memberReadDocAccess
+  update: Nc_memberUpdateDocAccess
+  delete: Nc_memberDeleteDocAccess
+}
+
+type Nc_memberDocAccessFields {
+  fullName: Nc_memberDocAccessFields_fullName
+  position: Nc_memberDocAccessFields_position
+  quote: Nc_memberDocAccessFields_quote
+  image: Nc_memberDocAccessFields_image
+  updatedAt: Nc_memberDocAccessFields_updatedAt
+  createdAt: Nc_memberDocAccessFields_createdAt
+}
+
+type Nc_memberDocAccessFields_fullName {
+  create: Nc_memberDocAccessFields_fullName_Create
+  read: Nc_memberDocAccessFields_fullName_Read
+  update: Nc_memberDocAccessFields_fullName_Update
+  delete: Nc_memberDocAccessFields_fullName_Delete
+}
+
+type Nc_memberDocAccessFields_fullName_Create {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_fullName_Read {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_fullName_Update {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_fullName_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_position {
+  create: Nc_memberDocAccessFields_position_Create
+  read: Nc_memberDocAccessFields_position_Read
+  update: Nc_memberDocAccessFields_position_Update
+  delete: Nc_memberDocAccessFields_position_Delete
+}
+
+type Nc_memberDocAccessFields_position_Create {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_position_Read {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_position_Update {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_position_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_quote {
+  create: Nc_memberDocAccessFields_quote_Create
+  read: Nc_memberDocAccessFields_quote_Read
+  update: Nc_memberDocAccessFields_quote_Update
+  delete: Nc_memberDocAccessFields_quote_Delete
+}
+
+type Nc_memberDocAccessFields_quote_Create {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_quote_Read {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_quote_Update {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_quote_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_image {
+  create: Nc_memberDocAccessFields_image_Create
+  read: Nc_memberDocAccessFields_image_Read
+  update: Nc_memberDocAccessFields_image_Update
+  delete: Nc_memberDocAccessFields_image_Delete
+}
+
+type Nc_memberDocAccessFields_image_Create {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_image_Read {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_image_Update {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_image_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_updatedAt {
+  create: Nc_memberDocAccessFields_updatedAt_Create
+  read: Nc_memberDocAccessFields_updatedAt_Read
+  update: Nc_memberDocAccessFields_updatedAt_Update
+  delete: Nc_memberDocAccessFields_updatedAt_Delete
+}
+
+type Nc_memberDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_createdAt {
+  create: Nc_memberDocAccessFields_createdAt_Create
+  read: Nc_memberDocAccessFields_createdAt_Read
+  update: Nc_memberDocAccessFields_createdAt_Update
+  delete: Nc_memberDocAccessFields_createdAt_Delete
+}
+
+type Nc_memberDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type Nc_memberDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_memberReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_memberUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_memberDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc {
+  id: Int!
+  year: Float!
+  members: [Nc_Members!]
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Nc_Members {
+  member: [Nc_member!]
   id: String
+}
+
+type Ncs {
+  docs: [Nc]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Nc_where {
+  year: Nc_year_operator
+  members__member: Nc_members__member_operator
+  members__id: Nc_members__id_operator
+  updatedAt: Nc_updatedAt_operator
+  createdAt: Nc_createdAt_operator
+  id: Nc_id_operator
+  AND: [Nc_where_and]
+  OR: [Nc_where_or]
+}
+
+input Nc_year_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+}
+
+input Nc_members__member_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input Nc_members__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Nc_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Nc_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Nc_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input Nc_where_and {
+  year: Nc_year_operator
+  members__member: Nc_members__member_operator
+  members__id: Nc_members__id_operator
+  updatedAt: Nc_updatedAt_operator
+  createdAt: Nc_createdAt_operator
+  id: Nc_id_operator
+  AND: [Nc_where_and]
+  OR: [Nc_where_or]
+}
+
+input Nc_where_or {
+  year: Nc_year_operator
+  members__member: Nc_members__member_operator
+  members__id: Nc_members__id_operator
+  updatedAt: Nc_updatedAt_operator
+  createdAt: Nc_createdAt_operator
+  id: Nc_id_operator
+  AND: [Nc_where_and]
+  OR: [Nc_where_or]
+}
+
+type countNcs {
+  totalDocs: Int
+}
+
+type ncDocAccess {
+  fields: NcDocAccessFields
+  create: NcCreateDocAccess
+  read: NcReadDocAccess
+  update: NcUpdateDocAccess
+  delete: NcDeleteDocAccess
+}
+
+type NcDocAccessFields {
+  year: NcDocAccessFields_year
+  members: NcDocAccessFields_members
+  updatedAt: NcDocAccessFields_updatedAt
+  createdAt: NcDocAccessFields_createdAt
+}
+
+type NcDocAccessFields_year {
+  create: NcDocAccessFields_year_Create
+  read: NcDocAccessFields_year_Read
+  update: NcDocAccessFields_year_Update
+  delete: NcDocAccessFields_year_Delete
+}
+
+type NcDocAccessFields_year_Create {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_year_Read {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_year_Update {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_year_Delete {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members {
+  create: NcDocAccessFields_members_Create
+  read: NcDocAccessFields_members_Read
+  update: NcDocAccessFields_members_Update
+  delete: NcDocAccessFields_members_Delete
+  fields: NcDocAccessFields_members_Fields
+}
+
+type NcDocAccessFields_members_Create {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_Read {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_Update {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_Delete {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_Fields {
+  member: NcDocAccessFields_members_member
+  id: NcDocAccessFields_members_id
+}
+
+type NcDocAccessFields_members_member {
+  create: NcDocAccessFields_members_member_Create
+  read: NcDocAccessFields_members_member_Read
+  update: NcDocAccessFields_members_member_Update
+  delete: NcDocAccessFields_members_member_Delete
+}
+
+type NcDocAccessFields_members_member_Create {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_member_Read {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_member_Update {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_member_Delete {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_id {
+  create: NcDocAccessFields_members_id_Create
+  read: NcDocAccessFields_members_id_Read
+  update: NcDocAccessFields_members_id_Update
+  delete: NcDocAccessFields_members_id_Delete
+}
+
+type NcDocAccessFields_members_id_Create {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_id_Read {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_id_Update {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_members_id_Delete {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_updatedAt {
+  create: NcDocAccessFields_updatedAt_Create
+  read: NcDocAccessFields_updatedAt_Read
+  update: NcDocAccessFields_updatedAt_Update
+  delete: NcDocAccessFields_updatedAt_Delete
+}
+
+type NcDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_createdAt {
+  create: NcDocAccessFields_createdAt_Create
+  read: NcDocAccessFields_createdAt_Read
+  update: NcDocAccessFields_createdAt_Update
+  delete: NcDocAccessFields_createdAt_Delete
+}
+
+type NcDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type NcDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type NcCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type NcReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type NcUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type NcDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Partner {
+  id: Int!
+  name: String!
+  image: Media!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Partners {
+  docs: [Partner]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Partner_where {
+  name: Partner_name_operator
+  image: Partner_image_operator
+  updatedAt: Partner_updatedAt_operator
+  createdAt: Partner_createdAt_operator
+  id: Partner_id_operator
+  AND: [Partner_where_and]
+  OR: [Partner_where_or]
+}
+
+input Partner_name_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Partner_image_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input Partner_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Partner_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Partner_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input Partner_where_and {
+  name: Partner_name_operator
+  image: Partner_image_operator
+  updatedAt: Partner_updatedAt_operator
+  createdAt: Partner_createdAt_operator
+  id: Partner_id_operator
+  AND: [Partner_where_and]
+  OR: [Partner_where_or]
+}
+
+input Partner_where_or {
+  name: Partner_name_operator
+  image: Partner_image_operator
+  updatedAt: Partner_updatedAt_operator
+  createdAt: Partner_createdAt_operator
+  id: Partner_id_operator
+  AND: [Partner_where_and]
+  OR: [Partner_where_or]
+}
+
+type countPartners {
+  totalDocs: Int
+}
+
+type partnerDocAccess {
+  fields: PartnerDocAccessFields
+  create: PartnerCreateDocAccess
+  read: PartnerReadDocAccess
+  update: PartnerUpdateDocAccess
+  delete: PartnerDeleteDocAccess
+}
+
+type PartnerDocAccessFields {
+  name: PartnerDocAccessFields_name
+  image: PartnerDocAccessFields_image
+  updatedAt: PartnerDocAccessFields_updatedAt
+  createdAt: PartnerDocAccessFields_createdAt
+}
+
+type PartnerDocAccessFields_name {
+  create: PartnerDocAccessFields_name_Create
+  read: PartnerDocAccessFields_name_Read
+  update: PartnerDocAccessFields_name_Update
+  delete: PartnerDocAccessFields_name_Delete
+}
+
+type PartnerDocAccessFields_name_Create {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_name_Read {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_name_Update {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_name_Delete {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_image {
+  create: PartnerDocAccessFields_image_Create
+  read: PartnerDocAccessFields_image_Read
+  update: PartnerDocAccessFields_image_Update
+  delete: PartnerDocAccessFields_image_Delete
+}
+
+type PartnerDocAccessFields_image_Create {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_image_Read {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_image_Update {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_image_Delete {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_updatedAt {
+  create: PartnerDocAccessFields_updatedAt_Create
+  read: PartnerDocAccessFields_updatedAt_Read
+  update: PartnerDocAccessFields_updatedAt_Update
+  delete: PartnerDocAccessFields_updatedAt_Delete
+}
+
+type PartnerDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_createdAt {
+  create: PartnerDocAccessFields_createdAt_Create
+  read: PartnerDocAccessFields_createdAt_Read
+  update: PartnerDocAccessFields_createdAt_Update
+  delete: PartnerDocAccessFields_createdAt_Delete
+}
+
+type PartnerDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PartnerDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PartnerCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PartnerReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PartnerUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PartnerDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Patron {
+  id: Int!
+  qualifier: Patron_qualifier!
+  fullName: String!
+  title: String!
+  image: Media!
+  domain: Patron_domain!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+enum Patron_qualifier {
+  Mr
+  Mrs
+  Ms
+  Dr
+  Prof
+}
+
+enum Patron_domain {
+  EU
+  CY
+}
+
+type Patrons {
+  docs: [Patron]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Patron_where {
+  qualifier: Patron_qualifier_operator
+  fullName: Patron_fullName_operator
+  title: Patron_title_operator
+  image: Patron_image_operator
+  domain: Patron_domain_operator
+  updatedAt: Patron_updatedAt_operator
+  createdAt: Patron_createdAt_operator
+  id: Patron_id_operator
+  AND: [Patron_where_and]
+  OR: [Patron_where_or]
+}
+
+input Patron_qualifier_operator {
+  equals: Patron_qualifier_Input
+  not_equals: Patron_qualifier_Input
+  in: [Patron_qualifier_Input]
+  not_in: [Patron_qualifier_Input]
+  all: [Patron_qualifier_Input]
+}
+
+enum Patron_qualifier_Input {
+  Mr
+  Mrs
+  Ms
+  Dr
+  Prof
+}
+
+input Patron_fullName_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Patron_title_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Patron_image_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input Patron_domain_operator {
+  equals: Patron_domain_Input
+  not_equals: Patron_domain_Input
+  like: Patron_domain_Input
+  contains: Patron_domain_Input
+}
+
+enum Patron_domain_Input {
+  EU
+  CY
+}
+
+input Patron_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Patron_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Patron_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input Patron_where_and {
+  qualifier: Patron_qualifier_operator
+  fullName: Patron_fullName_operator
+  title: Patron_title_operator
+  image: Patron_image_operator
+  domain: Patron_domain_operator
+  updatedAt: Patron_updatedAt_operator
+  createdAt: Patron_createdAt_operator
+  id: Patron_id_operator
+  AND: [Patron_where_and]
+  OR: [Patron_where_or]
+}
+
+input Patron_where_or {
+  qualifier: Patron_qualifier_operator
+  fullName: Patron_fullName_operator
+  title: Patron_title_operator
+  image: Patron_image_operator
+  domain: Patron_domain_operator
+  updatedAt: Patron_updatedAt_operator
+  createdAt: Patron_createdAt_operator
+  id: Patron_id_operator
+  AND: [Patron_where_and]
+  OR: [Patron_where_or]
+}
+
+type countPatrons {
+  totalDocs: Int
+}
+
+type patronDocAccess {
+  fields: PatronDocAccessFields
+  create: PatronCreateDocAccess
+  read: PatronReadDocAccess
+  update: PatronUpdateDocAccess
+  delete: PatronDeleteDocAccess
+}
+
+type PatronDocAccessFields {
+  qualifier: PatronDocAccessFields_qualifier
+  fullName: PatronDocAccessFields_fullName
+  title: PatronDocAccessFields_title
+  image: PatronDocAccessFields_image
+  domain: PatronDocAccessFields_domain
+  updatedAt: PatronDocAccessFields_updatedAt
+  createdAt: PatronDocAccessFields_createdAt
+}
+
+type PatronDocAccessFields_qualifier {
+  create: PatronDocAccessFields_qualifier_Create
+  read: PatronDocAccessFields_qualifier_Read
+  update: PatronDocAccessFields_qualifier_Update
+  delete: PatronDocAccessFields_qualifier_Delete
+}
+
+type PatronDocAccessFields_qualifier_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_qualifier_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_qualifier_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_qualifier_Delete {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_fullName {
+  create: PatronDocAccessFields_fullName_Create
+  read: PatronDocAccessFields_fullName_Read
+  update: PatronDocAccessFields_fullName_Update
+  delete: PatronDocAccessFields_fullName_Delete
+}
+
+type PatronDocAccessFields_fullName_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_fullName_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_fullName_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_fullName_Delete {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_title {
+  create: PatronDocAccessFields_title_Create
+  read: PatronDocAccessFields_title_Read
+  update: PatronDocAccessFields_title_Update
+  delete: PatronDocAccessFields_title_Delete
+}
+
+type PatronDocAccessFields_title_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_title_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_title_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_title_Delete {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_image {
+  create: PatronDocAccessFields_image_Create
+  read: PatronDocAccessFields_image_Read
+  update: PatronDocAccessFields_image_Update
+  delete: PatronDocAccessFields_image_Delete
+}
+
+type PatronDocAccessFields_image_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_image_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_image_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_image_Delete {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_domain {
+  create: PatronDocAccessFields_domain_Create
+  read: PatronDocAccessFields_domain_Read
+  update: PatronDocAccessFields_domain_Update
+  delete: PatronDocAccessFields_domain_Delete
+}
+
+type PatronDocAccessFields_domain_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_domain_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_domain_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_domain_Delete {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_updatedAt {
+  create: PatronDocAccessFields_updatedAt_Create
+  read: PatronDocAccessFields_updatedAt_Read
+  update: PatronDocAccessFields_updatedAt_Update
+  delete: PatronDocAccessFields_updatedAt_Delete
+}
+
+type PatronDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_createdAt {
+  create: PatronDocAccessFields_createdAt_Create
+  read: PatronDocAccessFields_createdAt_Read
+  update: PatronDocAccessFields_createdAt_Update
+  delete: PatronDocAccessFields_createdAt_Delete
+}
+
+type PatronDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PatronDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PatronCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PatronReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PatronUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PatronDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElement {
+  id: Int!
+  title: String!
+  description: String!
+  image: Media!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type SessionElements {
+  docs: [SessionElement]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input SessionElement_where {
+  title: SessionElement_title_operator
+  description: SessionElement_description_operator
+  image: SessionElement_image_operator
+  updatedAt: SessionElement_updatedAt_operator
+  createdAt: SessionElement_createdAt_operator
+  id: SessionElement_id_operator
+  AND: [SessionElement_where_and]
+  OR: [SessionElement_where_or]
+}
+
+input SessionElement_title_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input SessionElement_description_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+}
+
+input SessionElement_image_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input SessionElement_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input SessionElement_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input SessionElement_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input SessionElement_where_and {
+  title: SessionElement_title_operator
+  description: SessionElement_description_operator
+  image: SessionElement_image_operator
+  updatedAt: SessionElement_updatedAt_operator
+  createdAt: SessionElement_createdAt_operator
+  id: SessionElement_id_operator
+  AND: [SessionElement_where_and]
+  OR: [SessionElement_where_or]
+}
+
+input SessionElement_where_or {
+  title: SessionElement_title_operator
+  description: SessionElement_description_operator
+  image: SessionElement_image_operator
+  updatedAt: SessionElement_updatedAt_operator
+  createdAt: SessionElement_createdAt_operator
+  id: SessionElement_id_operator
+  AND: [SessionElement_where_and]
+  OR: [SessionElement_where_or]
+}
+
+type countSessionElements {
+  totalDocs: Int
+}
+
+type sessionElementDocAccess {
+  fields: SessionElementDocAccessFields
+  create: SessionElementCreateDocAccess
+  read: SessionElementReadDocAccess
+  update: SessionElementUpdateDocAccess
+  delete: SessionElementDeleteDocAccess
+}
+
+type SessionElementDocAccessFields {
+  title: SessionElementDocAccessFields_title
+  description: SessionElementDocAccessFields_description
+  image: SessionElementDocAccessFields_image
+  updatedAt: SessionElementDocAccessFields_updatedAt
+  createdAt: SessionElementDocAccessFields_createdAt
+}
+
+type SessionElementDocAccessFields_title {
+  create: SessionElementDocAccessFields_title_Create
+  read: SessionElementDocAccessFields_title_Read
+  update: SessionElementDocAccessFields_title_Update
+  delete: SessionElementDocAccessFields_title_Delete
+}
+
+type SessionElementDocAccessFields_title_Create {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_title_Read {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_title_Update {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_title_Delete {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_description {
+  create: SessionElementDocAccessFields_description_Create
+  read: SessionElementDocAccessFields_description_Read
+  update: SessionElementDocAccessFields_description_Update
+  delete: SessionElementDocAccessFields_description_Delete
+}
+
+type SessionElementDocAccessFields_description_Create {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_description_Read {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_description_Update {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_description_Delete {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_image {
+  create: SessionElementDocAccessFields_image_Create
+  read: SessionElementDocAccessFields_image_Read
+  update: SessionElementDocAccessFields_image_Update
+  delete: SessionElementDocAccessFields_image_Delete
+}
+
+type SessionElementDocAccessFields_image_Create {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_image_Read {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_image_Update {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_image_Delete {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_updatedAt {
+  create: SessionElementDocAccessFields_updatedAt_Create
+  read: SessionElementDocAccessFields_updatedAt_Read
+  update: SessionElementDocAccessFields_updatedAt_Update
+  delete: SessionElementDocAccessFields_updatedAt_Delete
+}
+
+type SessionElementDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_createdAt {
+  create: SessionElementDocAccessFields_createdAt_Create
+  read: SessionElementDocAccessFields_createdAt_Read
+  update: SessionElementDocAccessFields_createdAt_Update
+  delete: SessionElementDocAccessFields_createdAt_Delete
+}
+
+type SessionElementDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type SessionElementDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type SessionElementCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElementReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElementUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElementDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Testimonial {
+  id: Int!
+  quote: String!
+  authorFullName: String!
+  authorDescription: String!
+  authorImage: Media!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type Testimonials {
+  docs: [Testimonial]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Testimonial_where {
+  quote: Testimonial_quote_operator
+  authorFullName: Testimonial_authorFullName_operator
+  authorDescription: Testimonial_authorDescription_operator
+  authorImage: Testimonial_authorImage_operator
+  updatedAt: Testimonial_updatedAt_operator
+  createdAt: Testimonial_createdAt_operator
+  id: Testimonial_id_operator
+  AND: [Testimonial_where_and]
+  OR: [Testimonial_where_or]
+}
+
+input Testimonial_quote_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Testimonial_authorFullName_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Testimonial_authorDescription_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Testimonial_authorImage_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+}
+
+input Testimonial_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Testimonial_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Testimonial_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input Testimonial_where_and {
+  quote: Testimonial_quote_operator
+  authorFullName: Testimonial_authorFullName_operator
+  authorDescription: Testimonial_authorDescription_operator
+  authorImage: Testimonial_authorImage_operator
+  updatedAt: Testimonial_updatedAt_operator
+  createdAt: Testimonial_createdAt_operator
+  id: Testimonial_id_operator
+  AND: [Testimonial_where_and]
+  OR: [Testimonial_where_or]
+}
+
+input Testimonial_where_or {
+  quote: Testimonial_quote_operator
+  authorFullName: Testimonial_authorFullName_operator
+  authorDescription: Testimonial_authorDescription_operator
+  authorImage: Testimonial_authorImage_operator
+  updatedAt: Testimonial_updatedAt_operator
+  createdAt: Testimonial_createdAt_operator
+  id: Testimonial_id_operator
+  AND: [Testimonial_where_and]
+  OR: [Testimonial_where_or]
+}
+
+type countTestimonials {
+  totalDocs: Int
+}
+
+type testimonialsDocAccess {
+  fields: TestimonialsDocAccessFields
+  create: TestimonialsCreateDocAccess
+  read: TestimonialsReadDocAccess
+  update: TestimonialsUpdateDocAccess
+  delete: TestimonialsDeleteDocAccess
+}
+
+type TestimonialsDocAccessFields {
+  quote: TestimonialsDocAccessFields_quote
+  authorFullName: TestimonialsDocAccessFields_authorFullName
+  authorDescription: TestimonialsDocAccessFields_authorDescription
+  authorImage: TestimonialsDocAccessFields_authorImage
+  updatedAt: TestimonialsDocAccessFields_updatedAt
+  createdAt: TestimonialsDocAccessFields_createdAt
+}
+
+type TestimonialsDocAccessFields_quote {
+  create: TestimonialsDocAccessFields_quote_Create
+  read: TestimonialsDocAccessFields_quote_Read
+  update: TestimonialsDocAccessFields_quote_Update
+  delete: TestimonialsDocAccessFields_quote_Delete
+}
+
+type TestimonialsDocAccessFields_quote_Create {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_quote_Read {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_quote_Update {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_quote_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorFullName {
+  create: TestimonialsDocAccessFields_authorFullName_Create
+  read: TestimonialsDocAccessFields_authorFullName_Read
+  update: TestimonialsDocAccessFields_authorFullName_Update
+  delete: TestimonialsDocAccessFields_authorFullName_Delete
+}
+
+type TestimonialsDocAccessFields_authorFullName_Create {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorFullName_Read {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorFullName_Update {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorFullName_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorDescription {
+  create: TestimonialsDocAccessFields_authorDescription_Create
+  read: TestimonialsDocAccessFields_authorDescription_Read
+  update: TestimonialsDocAccessFields_authorDescription_Update
+  delete: TestimonialsDocAccessFields_authorDescription_Delete
+}
+
+type TestimonialsDocAccessFields_authorDescription_Create {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorDescription_Read {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorDescription_Update {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorDescription_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorImage {
+  create: TestimonialsDocAccessFields_authorImage_Create
+  read: TestimonialsDocAccessFields_authorImage_Read
+  update: TestimonialsDocAccessFields_authorImage_Update
+  delete: TestimonialsDocAccessFields_authorImage_Delete
+}
+
+type TestimonialsDocAccessFields_authorImage_Create {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorImage_Read {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorImage_Update {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_authorImage_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_updatedAt {
+  create: TestimonialsDocAccessFields_updatedAt_Create
+  read: TestimonialsDocAccessFields_updatedAt_Read
+  update: TestimonialsDocAccessFields_updatedAt_Update
+  delete: TestimonialsDocAccessFields_updatedAt_Delete
+}
+
+type TestimonialsDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_createdAt {
+  create: TestimonialsDocAccessFields_createdAt_Create
+  read: TestimonialsDocAccessFields_createdAt_Read
+  update: TestimonialsDocAccessFields_createdAt_Update
+  delete: TestimonialsDocAccessFields_createdAt_Delete
+}
+
+type TestimonialsDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type TestimonialsDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type TestimonialsReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type TestimonialsUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type TestimonialsDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocument {
+  id: Int!
+  document: PayloadLockedDocument_Document_Relationship
+  globalSlug: String
+  user: PayloadLockedDocument_User_Relationship!
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type PayloadLockedDocument_Document_Relationship {
+  relationTo: PayloadLockedDocument_Document_RelationTo
+  value: PayloadLockedDocument_Document
+}
+
+enum PayloadLockedDocument_Document_RelationTo {
+  users
+  pages
+  media
+  events
+  nc_member
+  nc
+  partner
+  patron
+  sessionElement
+  testimonials
+}
+
+union PayloadLockedDocument_Document = User | Page | Media | Event | Nc_member | Nc | Partner | Patron | SessionElement | Testimonial
+
+type PayloadLockedDocument_User_Relationship {
+  relationTo: PayloadLockedDocument_User_RelationTo
+  value: PayloadLockedDocument_User
+}
+
+enum PayloadLockedDocument_User_RelationTo {
+  users
+}
+
+union PayloadLockedDocument_User = User
+
+type PayloadLockedDocuments {
+  docs: [PayloadLockedDocument]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input PayloadLockedDocument_where {
+  document: PayloadLockedDocument_document_Relation
+  globalSlug: PayloadLockedDocument_globalSlug_operator
+  user: PayloadLockedDocument_user_Relation
+  updatedAt: PayloadLockedDocument_updatedAt_operator
+  createdAt: PayloadLockedDocument_createdAt_operator
+  id: PayloadLockedDocument_id_operator
+  AND: [PayloadLockedDocument_where_and]
+  OR: [PayloadLockedDocument_where_or]
+}
+
+input PayloadLockedDocument_document_Relation {
+  relationTo: PayloadLockedDocument_document_Relation_RelationTo
+  value: JSON
+}
+
+enum PayloadLockedDocument_document_Relation_RelationTo {
+  users
+  pages
+  media
+  events
+  nc_member
+  nc
+  partner
+  patron
+  sessionElement
+  testimonials
+}
+
+input PayloadLockedDocument_globalSlug_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PayloadLockedDocument_user_Relation {
+  relationTo: PayloadLockedDocument_user_Relation_RelationTo
+  value: JSON
+}
+
+enum PayloadLockedDocument_user_Relation_RelationTo {
+  users
+}
+
+input PayloadLockedDocument_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PayloadLockedDocument_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PayloadLockedDocument_id_operator {
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
+  exists: Boolean
+}
+
+input PayloadLockedDocument_where_and {
+  document: PayloadLockedDocument_document_Relation
+  globalSlug: PayloadLockedDocument_globalSlug_operator
+  user: PayloadLockedDocument_user_Relation
+  updatedAt: PayloadLockedDocument_updatedAt_operator
+  createdAt: PayloadLockedDocument_createdAt_operator
+  id: PayloadLockedDocument_id_operator
+  AND: [PayloadLockedDocument_where_and]
+  OR: [PayloadLockedDocument_where_or]
+}
+
+input PayloadLockedDocument_where_or {
+  document: PayloadLockedDocument_document_Relation
+  globalSlug: PayloadLockedDocument_globalSlug_operator
+  user: PayloadLockedDocument_user_Relation
+  updatedAt: PayloadLockedDocument_updatedAt_operator
+  createdAt: PayloadLockedDocument_createdAt_operator
+  id: PayloadLockedDocument_id_operator
+  AND: [PayloadLockedDocument_where_and]
+  OR: [PayloadLockedDocument_where_or]
+}
+
+type countPayloadLockedDocuments {
+  totalDocs: Int
+}
+
+type payload_locked_documentsDocAccess {
+  fields: PayloadLockedDocumentsDocAccessFields
+  create: PayloadLockedDocumentsCreateDocAccess
+  read: PayloadLockedDocumentsReadDocAccess
+  update: PayloadLockedDocumentsUpdateDocAccess
+  delete: PayloadLockedDocumentsDeleteDocAccess
+}
+
+type PayloadLockedDocumentsDocAccessFields {
+  document: PayloadLockedDocumentsDocAccessFields_document
+  globalSlug: PayloadLockedDocumentsDocAccessFields_globalSlug
+  user: PayloadLockedDocumentsDocAccessFields_user
+  updatedAt: PayloadLockedDocumentsDocAccessFields_updatedAt
+  createdAt: PayloadLockedDocumentsDocAccessFields_createdAt
+}
+
+type PayloadLockedDocumentsDocAccessFields_document {
+  create: PayloadLockedDocumentsDocAccessFields_document_Create
+  read: PayloadLockedDocumentsDocAccessFields_document_Read
+  update: PayloadLockedDocumentsDocAccessFields_document_Update
+  delete: PayloadLockedDocumentsDocAccessFields_document_Delete
+}
+
+type PayloadLockedDocumentsDocAccessFields_document_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_document_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_document_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_document_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_globalSlug {
+  create: PayloadLockedDocumentsDocAccessFields_globalSlug_Create
+  read: PayloadLockedDocumentsDocAccessFields_globalSlug_Read
+  update: PayloadLockedDocumentsDocAccessFields_globalSlug_Update
+  delete: PayloadLockedDocumentsDocAccessFields_globalSlug_Delete
+}
+
+type PayloadLockedDocumentsDocAccessFields_globalSlug_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_globalSlug_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_globalSlug_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_globalSlug_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_user {
+  create: PayloadLockedDocumentsDocAccessFields_user_Create
+  read: PayloadLockedDocumentsDocAccessFields_user_Read
+  update: PayloadLockedDocumentsDocAccessFields_user_Update
+  delete: PayloadLockedDocumentsDocAccessFields_user_Delete
+}
+
+type PayloadLockedDocumentsDocAccessFields_user_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_user_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_user_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_user_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_updatedAt {
+  create: PayloadLockedDocumentsDocAccessFields_updatedAt_Create
+  read: PayloadLockedDocumentsDocAccessFields_updatedAt_Read
+  update: PayloadLockedDocumentsDocAccessFields_updatedAt_Update
+  delete: PayloadLockedDocumentsDocAccessFields_updatedAt_Delete
+}
+
+type PayloadLockedDocumentsDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_createdAt {
+  create: PayloadLockedDocumentsDocAccessFields_createdAt_Create
+  read: PayloadLockedDocumentsDocAccessFields_createdAt_Read
+  update: PayloadLockedDocumentsDocAccessFields_createdAt_Update
+  delete: PayloadLockedDocumentsDocAccessFields_createdAt_Delete
+}
+
+type PayloadLockedDocumentsDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocumentsReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocumentsUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocumentsDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreference {
+  id: Int!
   user: PayloadPreference_User_Relationship!
   key: String
   value: JSON
@@ -1160,13 +3898,12 @@ input PayloadPreference_createdAt_operator {
 }
 
 input PayloadPreference_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: Int
+  not_equals: Int
+  greater_than_equal: Int
+  greater_than: Int
+  less_than_equal: Int
+  less_than: Int
   exists: Boolean
 }
 
@@ -1352,6 +4089,14 @@ type Access {
   users: usersAccess
   pages: pagesAccess
   media: mediaAccess
+  events: eventsAccess
+  nc_member: nc_memberAccess
+  nc: ncAccess
+  partner: partnerAccess
+  patron: patronAccess
+  sessionElement: sessionElementAccess
+  testimonials: testimonialsAccess
+  payload_locked_documents: payload_locked_documentsAccess
   payload_preferences: payload_preferencesAccess
 }
 
@@ -1934,6 +4679,1530 @@ type MediaDeleteAccess {
   where: JSONObject
 }
 
+type eventsAccess {
+  fields: EventsFields
+  create: EventsCreateAccess
+  read: EventsReadAccess
+  update: EventsUpdateAccess
+  delete: EventsDeleteAccess
+}
+
+type EventsFields {
+  title: EventsFields_title
+  longDescription: EventsFields_longDescription
+  shortDescription: EventsFields_shortDescription
+  startDate: EventsFields_startDate
+  endDate: EventsFields_endDate
+  url: EventsFields_url
+  logo: EventsFields_logo
+  cardImage: EventsFields_cardImage
+  actionText: EventsFields_actionText
+  actionUrl: EventsFields_actionUrl
+  active: EventsFields_active
+  slug: EventsFields_slug
+  updatedAt: EventsFields_updatedAt
+  createdAt: EventsFields_createdAt
+}
+
+type EventsFields_title {
+  create: EventsFields_title_Create
+  read: EventsFields_title_Read
+  update: EventsFields_title_Update
+  delete: EventsFields_title_Delete
+}
+
+type EventsFields_title_Create {
+  permission: Boolean!
+}
+
+type EventsFields_title_Read {
+  permission: Boolean!
+}
+
+type EventsFields_title_Update {
+  permission: Boolean!
+}
+
+type EventsFields_title_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_longDescription {
+  create: EventsFields_longDescription_Create
+  read: EventsFields_longDescription_Read
+  update: EventsFields_longDescription_Update
+  delete: EventsFields_longDescription_Delete
+}
+
+type EventsFields_longDescription_Create {
+  permission: Boolean!
+}
+
+type EventsFields_longDescription_Read {
+  permission: Boolean!
+}
+
+type EventsFields_longDescription_Update {
+  permission: Boolean!
+}
+
+type EventsFields_longDescription_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_shortDescription {
+  create: EventsFields_shortDescription_Create
+  read: EventsFields_shortDescription_Read
+  update: EventsFields_shortDescription_Update
+  delete: EventsFields_shortDescription_Delete
+}
+
+type EventsFields_shortDescription_Create {
+  permission: Boolean!
+}
+
+type EventsFields_shortDescription_Read {
+  permission: Boolean!
+}
+
+type EventsFields_shortDescription_Update {
+  permission: Boolean!
+}
+
+type EventsFields_shortDescription_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_startDate {
+  create: EventsFields_startDate_Create
+  read: EventsFields_startDate_Read
+  update: EventsFields_startDate_Update
+  delete: EventsFields_startDate_Delete
+}
+
+type EventsFields_startDate_Create {
+  permission: Boolean!
+}
+
+type EventsFields_startDate_Read {
+  permission: Boolean!
+}
+
+type EventsFields_startDate_Update {
+  permission: Boolean!
+}
+
+type EventsFields_startDate_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_endDate {
+  create: EventsFields_endDate_Create
+  read: EventsFields_endDate_Read
+  update: EventsFields_endDate_Update
+  delete: EventsFields_endDate_Delete
+}
+
+type EventsFields_endDate_Create {
+  permission: Boolean!
+}
+
+type EventsFields_endDate_Read {
+  permission: Boolean!
+}
+
+type EventsFields_endDate_Update {
+  permission: Boolean!
+}
+
+type EventsFields_endDate_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_url {
+  create: EventsFields_url_Create
+  read: EventsFields_url_Read
+  update: EventsFields_url_Update
+  delete: EventsFields_url_Delete
+}
+
+type EventsFields_url_Create {
+  permission: Boolean!
+}
+
+type EventsFields_url_Read {
+  permission: Boolean!
+}
+
+type EventsFields_url_Update {
+  permission: Boolean!
+}
+
+type EventsFields_url_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_logo {
+  create: EventsFields_logo_Create
+  read: EventsFields_logo_Read
+  update: EventsFields_logo_Update
+  delete: EventsFields_logo_Delete
+}
+
+type EventsFields_logo_Create {
+  permission: Boolean!
+}
+
+type EventsFields_logo_Read {
+  permission: Boolean!
+}
+
+type EventsFields_logo_Update {
+  permission: Boolean!
+}
+
+type EventsFields_logo_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_cardImage {
+  create: EventsFields_cardImage_Create
+  read: EventsFields_cardImage_Read
+  update: EventsFields_cardImage_Update
+  delete: EventsFields_cardImage_Delete
+}
+
+type EventsFields_cardImage_Create {
+  permission: Boolean!
+}
+
+type EventsFields_cardImage_Read {
+  permission: Boolean!
+}
+
+type EventsFields_cardImage_Update {
+  permission: Boolean!
+}
+
+type EventsFields_cardImage_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_actionText {
+  create: EventsFields_actionText_Create
+  read: EventsFields_actionText_Read
+  update: EventsFields_actionText_Update
+  delete: EventsFields_actionText_Delete
+}
+
+type EventsFields_actionText_Create {
+  permission: Boolean!
+}
+
+type EventsFields_actionText_Read {
+  permission: Boolean!
+}
+
+type EventsFields_actionText_Update {
+  permission: Boolean!
+}
+
+type EventsFields_actionText_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_actionUrl {
+  create: EventsFields_actionUrl_Create
+  read: EventsFields_actionUrl_Read
+  update: EventsFields_actionUrl_Update
+  delete: EventsFields_actionUrl_Delete
+}
+
+type EventsFields_actionUrl_Create {
+  permission: Boolean!
+}
+
+type EventsFields_actionUrl_Read {
+  permission: Boolean!
+}
+
+type EventsFields_actionUrl_Update {
+  permission: Boolean!
+}
+
+type EventsFields_actionUrl_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_active {
+  create: EventsFields_active_Create
+  read: EventsFields_active_Read
+  update: EventsFields_active_Update
+  delete: EventsFields_active_Delete
+}
+
+type EventsFields_active_Create {
+  permission: Boolean!
+}
+
+type EventsFields_active_Read {
+  permission: Boolean!
+}
+
+type EventsFields_active_Update {
+  permission: Boolean!
+}
+
+type EventsFields_active_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_slug {
+  create: EventsFields_slug_Create
+  read: EventsFields_slug_Read
+  update: EventsFields_slug_Update
+  delete: EventsFields_slug_Delete
+}
+
+type EventsFields_slug_Create {
+  permission: Boolean!
+}
+
+type EventsFields_slug_Read {
+  permission: Boolean!
+}
+
+type EventsFields_slug_Update {
+  permission: Boolean!
+}
+
+type EventsFields_slug_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_updatedAt {
+  create: EventsFields_updatedAt_Create
+  read: EventsFields_updatedAt_Read
+  update: EventsFields_updatedAt_Update
+  delete: EventsFields_updatedAt_Delete
+}
+
+type EventsFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type EventsFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type EventsFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type EventsFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type EventsFields_createdAt {
+  create: EventsFields_createdAt_Create
+  read: EventsFields_createdAt_Read
+  update: EventsFields_createdAt_Update
+  delete: EventsFields_createdAt_Delete
+}
+
+type EventsFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type EventsFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type EventsFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type EventsFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type EventsCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type EventsReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type EventsUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type EventsDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type nc_memberAccess {
+  fields: Nc_memberFields
+  create: Nc_memberCreateAccess
+  read: Nc_memberReadAccess
+  update: Nc_memberUpdateAccess
+  delete: Nc_memberDeleteAccess
+}
+
+type Nc_memberFields {
+  fullName: Nc_memberFields_fullName
+  position: Nc_memberFields_position
+  quote: Nc_memberFields_quote
+  image: Nc_memberFields_image
+  updatedAt: Nc_memberFields_updatedAt
+  createdAt: Nc_memberFields_createdAt
+}
+
+type Nc_memberFields_fullName {
+  create: Nc_memberFields_fullName_Create
+  read: Nc_memberFields_fullName_Read
+  update: Nc_memberFields_fullName_Update
+  delete: Nc_memberFields_fullName_Delete
+}
+
+type Nc_memberFields_fullName_Create {
+  permission: Boolean!
+}
+
+type Nc_memberFields_fullName_Read {
+  permission: Boolean!
+}
+
+type Nc_memberFields_fullName_Update {
+  permission: Boolean!
+}
+
+type Nc_memberFields_fullName_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberFields_position {
+  create: Nc_memberFields_position_Create
+  read: Nc_memberFields_position_Read
+  update: Nc_memberFields_position_Update
+  delete: Nc_memberFields_position_Delete
+}
+
+type Nc_memberFields_position_Create {
+  permission: Boolean!
+}
+
+type Nc_memberFields_position_Read {
+  permission: Boolean!
+}
+
+type Nc_memberFields_position_Update {
+  permission: Boolean!
+}
+
+type Nc_memberFields_position_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberFields_quote {
+  create: Nc_memberFields_quote_Create
+  read: Nc_memberFields_quote_Read
+  update: Nc_memberFields_quote_Update
+  delete: Nc_memberFields_quote_Delete
+}
+
+type Nc_memberFields_quote_Create {
+  permission: Boolean!
+}
+
+type Nc_memberFields_quote_Read {
+  permission: Boolean!
+}
+
+type Nc_memberFields_quote_Update {
+  permission: Boolean!
+}
+
+type Nc_memberFields_quote_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberFields_image {
+  create: Nc_memberFields_image_Create
+  read: Nc_memberFields_image_Read
+  update: Nc_memberFields_image_Update
+  delete: Nc_memberFields_image_Delete
+}
+
+type Nc_memberFields_image_Create {
+  permission: Boolean!
+}
+
+type Nc_memberFields_image_Read {
+  permission: Boolean!
+}
+
+type Nc_memberFields_image_Update {
+  permission: Boolean!
+}
+
+type Nc_memberFields_image_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberFields_updatedAt {
+  create: Nc_memberFields_updatedAt_Create
+  read: Nc_memberFields_updatedAt_Read
+  update: Nc_memberFields_updatedAt_Update
+  delete: Nc_memberFields_updatedAt_Delete
+}
+
+type Nc_memberFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type Nc_memberFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type Nc_memberFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type Nc_memberFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberFields_createdAt {
+  create: Nc_memberFields_createdAt_Create
+  read: Nc_memberFields_createdAt_Read
+  update: Nc_memberFields_createdAt_Update
+  delete: Nc_memberFields_createdAt_Delete
+}
+
+type Nc_memberFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type Nc_memberFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type Nc_memberFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type Nc_memberFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type Nc_memberCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_memberReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_memberUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type Nc_memberDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type ncAccess {
+  fields: NcFields
+  create: NcCreateAccess
+  read: NcReadAccess
+  update: NcUpdateAccess
+  delete: NcDeleteAccess
+}
+
+type NcFields {
+  year: NcFields_year
+  members: NcFields_members
+  updatedAt: NcFields_updatedAt
+  createdAt: NcFields_createdAt
+}
+
+type NcFields_year {
+  create: NcFields_year_Create
+  read: NcFields_year_Read
+  update: NcFields_year_Update
+  delete: NcFields_year_Delete
+}
+
+type NcFields_year_Create {
+  permission: Boolean!
+}
+
+type NcFields_year_Read {
+  permission: Boolean!
+}
+
+type NcFields_year_Update {
+  permission: Boolean!
+}
+
+type NcFields_year_Delete {
+  permission: Boolean!
+}
+
+type NcFields_members {
+  create: NcFields_members_Create
+  read: NcFields_members_Read
+  update: NcFields_members_Update
+  delete: NcFields_members_Delete
+  fields: NcFields_members_Fields
+}
+
+type NcFields_members_Create {
+  permission: Boolean!
+}
+
+type NcFields_members_Read {
+  permission: Boolean!
+}
+
+type NcFields_members_Update {
+  permission: Boolean!
+}
+
+type NcFields_members_Delete {
+  permission: Boolean!
+}
+
+type NcFields_members_Fields {
+  member: NcFields_members_member
+  id: NcFields_members_id
+}
+
+type NcFields_members_member {
+  create: NcFields_members_member_Create
+  read: NcFields_members_member_Read
+  update: NcFields_members_member_Update
+  delete: NcFields_members_member_Delete
+}
+
+type NcFields_members_member_Create {
+  permission: Boolean!
+}
+
+type NcFields_members_member_Read {
+  permission: Boolean!
+}
+
+type NcFields_members_member_Update {
+  permission: Boolean!
+}
+
+type NcFields_members_member_Delete {
+  permission: Boolean!
+}
+
+type NcFields_members_id {
+  create: NcFields_members_id_Create
+  read: NcFields_members_id_Read
+  update: NcFields_members_id_Update
+  delete: NcFields_members_id_Delete
+}
+
+type NcFields_members_id_Create {
+  permission: Boolean!
+}
+
+type NcFields_members_id_Read {
+  permission: Boolean!
+}
+
+type NcFields_members_id_Update {
+  permission: Boolean!
+}
+
+type NcFields_members_id_Delete {
+  permission: Boolean!
+}
+
+type NcFields_updatedAt {
+  create: NcFields_updatedAt_Create
+  read: NcFields_updatedAt_Read
+  update: NcFields_updatedAt_Update
+  delete: NcFields_updatedAt_Delete
+}
+
+type NcFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type NcFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type NcFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type NcFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type NcFields_createdAt {
+  create: NcFields_createdAt_Create
+  read: NcFields_createdAt_Read
+  update: NcFields_createdAt_Update
+  delete: NcFields_createdAt_Delete
+}
+
+type NcFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type NcFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type NcFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type NcFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type NcCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type NcReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type NcUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type NcDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type partnerAccess {
+  fields: PartnerFields
+  create: PartnerCreateAccess
+  read: PartnerReadAccess
+  update: PartnerUpdateAccess
+  delete: PartnerDeleteAccess
+}
+
+type PartnerFields {
+  name: PartnerFields_name
+  image: PartnerFields_image
+  updatedAt: PartnerFields_updatedAt
+  createdAt: PartnerFields_createdAt
+}
+
+type PartnerFields_name {
+  create: PartnerFields_name_Create
+  read: PartnerFields_name_Read
+  update: PartnerFields_name_Update
+  delete: PartnerFields_name_Delete
+}
+
+type PartnerFields_name_Create {
+  permission: Boolean!
+}
+
+type PartnerFields_name_Read {
+  permission: Boolean!
+}
+
+type PartnerFields_name_Update {
+  permission: Boolean!
+}
+
+type PartnerFields_name_Delete {
+  permission: Boolean!
+}
+
+type PartnerFields_image {
+  create: PartnerFields_image_Create
+  read: PartnerFields_image_Read
+  update: PartnerFields_image_Update
+  delete: PartnerFields_image_Delete
+}
+
+type PartnerFields_image_Create {
+  permission: Boolean!
+}
+
+type PartnerFields_image_Read {
+  permission: Boolean!
+}
+
+type PartnerFields_image_Update {
+  permission: Boolean!
+}
+
+type PartnerFields_image_Delete {
+  permission: Boolean!
+}
+
+type PartnerFields_updatedAt {
+  create: PartnerFields_updatedAt_Create
+  read: PartnerFields_updatedAt_Read
+  update: PartnerFields_updatedAt_Update
+  delete: PartnerFields_updatedAt_Delete
+}
+
+type PartnerFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PartnerFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PartnerFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PartnerFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PartnerFields_createdAt {
+  create: PartnerFields_createdAt_Create
+  read: PartnerFields_createdAt_Read
+  update: PartnerFields_createdAt_Update
+  delete: PartnerFields_createdAt_Delete
+}
+
+type PartnerFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PartnerFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PartnerFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PartnerFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PartnerCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PartnerReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PartnerUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PartnerDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type patronAccess {
+  fields: PatronFields
+  create: PatronCreateAccess
+  read: PatronReadAccess
+  update: PatronUpdateAccess
+  delete: PatronDeleteAccess
+}
+
+type PatronFields {
+  qualifier: PatronFields_qualifier
+  fullName: PatronFields_fullName
+  title: PatronFields_title
+  image: PatronFields_image
+  domain: PatronFields_domain
+  updatedAt: PatronFields_updatedAt
+  createdAt: PatronFields_createdAt
+}
+
+type PatronFields_qualifier {
+  create: PatronFields_qualifier_Create
+  read: PatronFields_qualifier_Read
+  update: PatronFields_qualifier_Update
+  delete: PatronFields_qualifier_Delete
+}
+
+type PatronFields_qualifier_Create {
+  permission: Boolean!
+}
+
+type PatronFields_qualifier_Read {
+  permission: Boolean!
+}
+
+type PatronFields_qualifier_Update {
+  permission: Boolean!
+}
+
+type PatronFields_qualifier_Delete {
+  permission: Boolean!
+}
+
+type PatronFields_fullName {
+  create: PatronFields_fullName_Create
+  read: PatronFields_fullName_Read
+  update: PatronFields_fullName_Update
+  delete: PatronFields_fullName_Delete
+}
+
+type PatronFields_fullName_Create {
+  permission: Boolean!
+}
+
+type PatronFields_fullName_Read {
+  permission: Boolean!
+}
+
+type PatronFields_fullName_Update {
+  permission: Boolean!
+}
+
+type PatronFields_fullName_Delete {
+  permission: Boolean!
+}
+
+type PatronFields_title {
+  create: PatronFields_title_Create
+  read: PatronFields_title_Read
+  update: PatronFields_title_Update
+  delete: PatronFields_title_Delete
+}
+
+type PatronFields_title_Create {
+  permission: Boolean!
+}
+
+type PatronFields_title_Read {
+  permission: Boolean!
+}
+
+type PatronFields_title_Update {
+  permission: Boolean!
+}
+
+type PatronFields_title_Delete {
+  permission: Boolean!
+}
+
+type PatronFields_image {
+  create: PatronFields_image_Create
+  read: PatronFields_image_Read
+  update: PatronFields_image_Update
+  delete: PatronFields_image_Delete
+}
+
+type PatronFields_image_Create {
+  permission: Boolean!
+}
+
+type PatronFields_image_Read {
+  permission: Boolean!
+}
+
+type PatronFields_image_Update {
+  permission: Boolean!
+}
+
+type PatronFields_image_Delete {
+  permission: Boolean!
+}
+
+type PatronFields_domain {
+  create: PatronFields_domain_Create
+  read: PatronFields_domain_Read
+  update: PatronFields_domain_Update
+  delete: PatronFields_domain_Delete
+}
+
+type PatronFields_domain_Create {
+  permission: Boolean!
+}
+
+type PatronFields_domain_Read {
+  permission: Boolean!
+}
+
+type PatronFields_domain_Update {
+  permission: Boolean!
+}
+
+type PatronFields_domain_Delete {
+  permission: Boolean!
+}
+
+type PatronFields_updatedAt {
+  create: PatronFields_updatedAt_Create
+  read: PatronFields_updatedAt_Read
+  update: PatronFields_updatedAt_Update
+  delete: PatronFields_updatedAt_Delete
+}
+
+type PatronFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PatronFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PatronFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PatronFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PatronFields_createdAt {
+  create: PatronFields_createdAt_Create
+  read: PatronFields_createdAt_Read
+  update: PatronFields_createdAt_Update
+  delete: PatronFields_createdAt_Delete
+}
+
+type PatronFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PatronFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PatronFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PatronFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PatronCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PatronReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PatronUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PatronDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type sessionElementAccess {
+  fields: SessionElementFields
+  create: SessionElementCreateAccess
+  read: SessionElementReadAccess
+  update: SessionElementUpdateAccess
+  delete: SessionElementDeleteAccess
+}
+
+type SessionElementFields {
+  title: SessionElementFields_title
+  description: SessionElementFields_description
+  image: SessionElementFields_image
+  updatedAt: SessionElementFields_updatedAt
+  createdAt: SessionElementFields_createdAt
+}
+
+type SessionElementFields_title {
+  create: SessionElementFields_title_Create
+  read: SessionElementFields_title_Read
+  update: SessionElementFields_title_Update
+  delete: SessionElementFields_title_Delete
+}
+
+type SessionElementFields_title_Create {
+  permission: Boolean!
+}
+
+type SessionElementFields_title_Read {
+  permission: Boolean!
+}
+
+type SessionElementFields_title_Update {
+  permission: Boolean!
+}
+
+type SessionElementFields_title_Delete {
+  permission: Boolean!
+}
+
+type SessionElementFields_description {
+  create: SessionElementFields_description_Create
+  read: SessionElementFields_description_Read
+  update: SessionElementFields_description_Update
+  delete: SessionElementFields_description_Delete
+}
+
+type SessionElementFields_description_Create {
+  permission: Boolean!
+}
+
+type SessionElementFields_description_Read {
+  permission: Boolean!
+}
+
+type SessionElementFields_description_Update {
+  permission: Boolean!
+}
+
+type SessionElementFields_description_Delete {
+  permission: Boolean!
+}
+
+type SessionElementFields_image {
+  create: SessionElementFields_image_Create
+  read: SessionElementFields_image_Read
+  update: SessionElementFields_image_Update
+  delete: SessionElementFields_image_Delete
+}
+
+type SessionElementFields_image_Create {
+  permission: Boolean!
+}
+
+type SessionElementFields_image_Read {
+  permission: Boolean!
+}
+
+type SessionElementFields_image_Update {
+  permission: Boolean!
+}
+
+type SessionElementFields_image_Delete {
+  permission: Boolean!
+}
+
+type SessionElementFields_updatedAt {
+  create: SessionElementFields_updatedAt_Create
+  read: SessionElementFields_updatedAt_Read
+  update: SessionElementFields_updatedAt_Update
+  delete: SessionElementFields_updatedAt_Delete
+}
+
+type SessionElementFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type SessionElementFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type SessionElementFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type SessionElementFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type SessionElementFields_createdAt {
+  create: SessionElementFields_createdAt_Create
+  read: SessionElementFields_createdAt_Read
+  update: SessionElementFields_createdAt_Update
+  delete: SessionElementFields_createdAt_Delete
+}
+
+type SessionElementFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type SessionElementFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type SessionElementFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type SessionElementFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type SessionElementCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElementReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElementUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type SessionElementDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type testimonialsAccess {
+  fields: TestimonialsFields
+  create: TestimonialsCreateAccess
+  read: TestimonialsReadAccess
+  update: TestimonialsUpdateAccess
+  delete: TestimonialsDeleteAccess
+}
+
+type TestimonialsFields {
+  quote: TestimonialsFields_quote
+  authorFullName: TestimonialsFields_authorFullName
+  authorDescription: TestimonialsFields_authorDescription
+  authorImage: TestimonialsFields_authorImage
+  updatedAt: TestimonialsFields_updatedAt
+  createdAt: TestimonialsFields_createdAt
+}
+
+type TestimonialsFields_quote {
+  create: TestimonialsFields_quote_Create
+  read: TestimonialsFields_quote_Read
+  update: TestimonialsFields_quote_Update
+  delete: TestimonialsFields_quote_Delete
+}
+
+type TestimonialsFields_quote_Create {
+  permission: Boolean!
+}
+
+type TestimonialsFields_quote_Read {
+  permission: Boolean!
+}
+
+type TestimonialsFields_quote_Update {
+  permission: Boolean!
+}
+
+type TestimonialsFields_quote_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorFullName {
+  create: TestimonialsFields_authorFullName_Create
+  read: TestimonialsFields_authorFullName_Read
+  update: TestimonialsFields_authorFullName_Update
+  delete: TestimonialsFields_authorFullName_Delete
+}
+
+type TestimonialsFields_authorFullName_Create {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorFullName_Read {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorFullName_Update {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorFullName_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorDescription {
+  create: TestimonialsFields_authorDescription_Create
+  read: TestimonialsFields_authorDescription_Read
+  update: TestimonialsFields_authorDescription_Update
+  delete: TestimonialsFields_authorDescription_Delete
+}
+
+type TestimonialsFields_authorDescription_Create {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorDescription_Read {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorDescription_Update {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorDescription_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorImage {
+  create: TestimonialsFields_authorImage_Create
+  read: TestimonialsFields_authorImage_Read
+  update: TestimonialsFields_authorImage_Update
+  delete: TestimonialsFields_authorImage_Delete
+}
+
+type TestimonialsFields_authorImage_Create {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorImage_Read {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorImage_Update {
+  permission: Boolean!
+}
+
+type TestimonialsFields_authorImage_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsFields_updatedAt {
+  create: TestimonialsFields_updatedAt_Create
+  read: TestimonialsFields_updatedAt_Read
+  update: TestimonialsFields_updatedAt_Update
+  delete: TestimonialsFields_updatedAt_Delete
+}
+
+type TestimonialsFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type TestimonialsFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type TestimonialsFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type TestimonialsFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsFields_createdAt {
+  create: TestimonialsFields_createdAt_Create
+  read: TestimonialsFields_createdAt_Read
+  update: TestimonialsFields_createdAt_Update
+  delete: TestimonialsFields_createdAt_Delete
+}
+
+type TestimonialsFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type TestimonialsFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type TestimonialsFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type TestimonialsFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type TestimonialsCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type TestimonialsReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type TestimonialsUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type TestimonialsDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type payload_locked_documentsAccess {
+  fields: PayloadLockedDocumentsFields
+  create: PayloadLockedDocumentsCreateAccess
+  read: PayloadLockedDocumentsReadAccess
+  update: PayloadLockedDocumentsUpdateAccess
+  delete: PayloadLockedDocumentsDeleteAccess
+}
+
+type PayloadLockedDocumentsFields {
+  document: PayloadLockedDocumentsFields_document
+  globalSlug: PayloadLockedDocumentsFields_globalSlug
+  user: PayloadLockedDocumentsFields_user
+  updatedAt: PayloadLockedDocumentsFields_updatedAt
+  createdAt: PayloadLockedDocumentsFields_createdAt
+}
+
+type PayloadLockedDocumentsFields_document {
+  create: PayloadLockedDocumentsFields_document_Create
+  read: PayloadLockedDocumentsFields_document_Read
+  update: PayloadLockedDocumentsFields_document_Update
+  delete: PayloadLockedDocumentsFields_document_Delete
+}
+
+type PayloadLockedDocumentsFields_document_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_document_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_document_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_document_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_globalSlug {
+  create: PayloadLockedDocumentsFields_globalSlug_Create
+  read: PayloadLockedDocumentsFields_globalSlug_Read
+  update: PayloadLockedDocumentsFields_globalSlug_Update
+  delete: PayloadLockedDocumentsFields_globalSlug_Delete
+}
+
+type PayloadLockedDocumentsFields_globalSlug_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_globalSlug_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_globalSlug_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_globalSlug_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_user {
+  create: PayloadLockedDocumentsFields_user_Create
+  read: PayloadLockedDocumentsFields_user_Read
+  update: PayloadLockedDocumentsFields_user_Update
+  delete: PayloadLockedDocumentsFields_user_Delete
+}
+
+type PayloadLockedDocumentsFields_user_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_user_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_user_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_user_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_updatedAt {
+  create: PayloadLockedDocumentsFields_updatedAt_Create
+  read: PayloadLockedDocumentsFields_updatedAt_Read
+  update: PayloadLockedDocumentsFields_updatedAt_Update
+  delete: PayloadLockedDocumentsFields_updatedAt_Delete
+}
+
+type PayloadLockedDocumentsFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_createdAt {
+  create: PayloadLockedDocumentsFields_createdAt_Create
+  read: PayloadLockedDocumentsFields_createdAt_Read
+  update: PayloadLockedDocumentsFields_createdAt_Update
+  delete: PayloadLockedDocumentsFields_createdAt_Delete
+}
+
+type PayloadLockedDocumentsFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadLockedDocumentsCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocumentsReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocumentsUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadLockedDocumentsDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type payload_preferencesAccess {
   fields: PayloadPreferencesFields
   create: PayloadPreferencesCreateAccess
@@ -2087,26 +6356,58 @@ type PayloadPreferencesDeleteAccess {
 
 type Mutation {
   createUser(data: mutationUserInput!, draft: Boolean): User
-  updateUser(id: String!, autosave: Boolean, data: mutationUserUpdateInput!, draft: Boolean): User
-  deleteUser(id: String!): User
-  refreshTokenUser(token: String): usersRefreshedUser
+  updateUser(id: Int!, autosave: Boolean, data: mutationUserUpdateInput!, draft: Boolean): User
+  deleteUser(id: Int!): User
+  refreshTokenUser: usersRefreshedUser
   logoutUser: String
   unlockUser(email: String!): Boolean!
-  loginUser(email: String, password: String): usersLoginResult
-  forgotPasswordUser(disableEmail: Boolean, email: String!, expiration: Int): Boolean!
+  loginUser(email: String!, password: String): usersLoginResult
+  forgotPasswordUser(disableEmail: Boolean, expiration: Int, email: String!): Boolean!
   resetPasswordUser(password: String, token: String): usersResetPassword
   verifyEmailUser(token: String): Boolean
   createPage(data: mutationPageInput!, draft: Boolean): Page
-  updatePage(id: String!, autosave: Boolean, data: mutationPageUpdateInput!, draft: Boolean): Page
-  deletePage(id: String!): Page
-  duplicatePage(id: String!): Page
+  updatePage(id: Int!, autosave: Boolean, data: mutationPageUpdateInput!, draft: Boolean): Page
+  deletePage(id: Int!): Page
+  duplicatePage(id: Int!): Page
   createMedia(data: mutationMediaInput!, draft: Boolean): Media
-  updateMedia(id: String!, autosave: Boolean, data: mutationMediaUpdateInput!, draft: Boolean): Media
-  deleteMedia(id: String!): Media
+  updateMedia(id: Int!, autosave: Boolean, data: mutationMediaUpdateInput!, draft: Boolean): Media
+  deleteMedia(id: Int!): Media
+  createEvent(data: mutationEventInput!, draft: Boolean): Event
+  updateEvent(id: Int!, autosave: Boolean, data: mutationEventUpdateInput!, draft: Boolean): Event
+  deleteEvent(id: Int!): Event
+  duplicateEvent(id: Int!): Event
+  createNc_member(data: mutationNc_memberInput!, draft: Boolean): Nc_member
+  updateNc_member(id: Int!, autosave: Boolean, data: mutationNc_memberUpdateInput!, draft: Boolean): Nc_member
+  deleteNc_member(id: Int!): Nc_member
+  duplicateNc_member(id: Int!): Nc_member
+  createNc(data: mutationNcInput!, draft: Boolean): Nc
+  updateNc(id: Int!, autosave: Boolean, data: mutationNcUpdateInput!, draft: Boolean): Nc
+  deleteNc(id: Int!): Nc
+  duplicateNc(id: Int!): Nc
+  createPartner(data: mutationPartnerInput!, draft: Boolean): Partner
+  updatePartner(id: Int!, autosave: Boolean, data: mutationPartnerUpdateInput!, draft: Boolean): Partner
+  deletePartner(id: Int!): Partner
+  duplicatePartner(id: Int!): Partner
+  createPatron(data: mutationPatronInput!, draft: Boolean): Patron
+  updatePatron(id: Int!, autosave: Boolean, data: mutationPatronUpdateInput!, draft: Boolean): Patron
+  deletePatron(id: Int!): Patron
+  duplicatePatron(id: Int!): Patron
+  createSessionElement(data: mutationSessionElementInput!, draft: Boolean): SessionElement
+  updateSessionElement(id: Int!, autosave: Boolean, data: mutationSessionElementUpdateInput!, draft: Boolean): SessionElement
+  deleteSessionElement(id: Int!): SessionElement
+  duplicateSessionElement(id: Int!): SessionElement
+  createTestimonial(data: mutationTestimonialInput!, draft: Boolean): Testimonial
+  updateTestimonial(id: Int!, autosave: Boolean, data: mutationTestimonialUpdateInput!, draft: Boolean): Testimonial
+  deleteTestimonial(id: Int!): Testimonial
+  duplicateTestimonial(id: Int!): Testimonial
+  createPayloadLockedDocument(data: mutationPayloadLockedDocumentInput!, draft: Boolean): PayloadLockedDocument
+  updatePayloadLockedDocument(id: Int!, autosave: Boolean, data: mutationPayloadLockedDocumentUpdateInput!, draft: Boolean): PayloadLockedDocument
+  deletePayloadLockedDocument(id: Int!): PayloadLockedDocument
+  duplicatePayloadLockedDocument(id: Int!): PayloadLockedDocument
   createPayloadPreference(data: mutationPayloadPreferenceInput!, draft: Boolean): PayloadPreference
-  updatePayloadPreference(id: String!, autosave: Boolean, data: mutationPayloadPreferenceUpdateInput!, draft: Boolean): PayloadPreference
-  deletePayloadPreference(id: String!): PayloadPreference
-  duplicatePayloadPreference(id: String!): PayloadPreference
+  updatePayloadPreference(id: Int!, autosave: Boolean, data: mutationPayloadPreferenceUpdateInput!, draft: Boolean): PayloadPreference
+  deletePayloadPreference(id: Int!): PayloadPreference
+  duplicatePayloadPreference(id: Int!): PayloadPreference
 }
 
 input mutationUserInput {
@@ -2138,6 +6439,7 @@ input mutationUserUpdateInput {
 type usersRefreshedUser {
   exp: Int
   refreshedToken: String
+  strategy: String
   user: usersJWT
 }
 
@@ -2199,6 +6501,236 @@ input mutationMediaUpdateInput {
   height: Float
   focalX: Float
   focalY: Float
+}
+
+input mutationEventInput {
+  title: String!
+  longDescription: String
+  shortDescription: String!
+  startDate: String!
+  endDate: String
+  url: String
+  logo: Int
+  cardImage: Int
+  actionText: String
+  actionUrl: String
+  active: Boolean
+  slug: String
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationEventUpdateInput {
+  title: String
+  longDescription: String
+  shortDescription: String
+  startDate: String
+  endDate: String
+  url: String
+  logo: Int
+  cardImage: Int
+  actionText: String
+  actionUrl: String
+  active: Boolean
+  slug: String
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationNc_memberInput {
+  fullName: String!
+  position: String!
+  quote: String
+  image: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationNc_memberUpdateInput {
+  fullName: String
+  position: String
+  quote: String
+  image: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationNcInput {
+  year: Float!
+  members: [mutationNc_MembersInput]
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationNc_MembersInput {
+  member: [Int]
+  id: String
+}
+
+input mutationNcUpdateInput {
+  year: Float
+  members: [mutationNcUpdate_MembersInput]
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationNcUpdate_MembersInput {
+  member: [Int]
+  id: String
+}
+
+input mutationPartnerInput {
+  name: String!
+  image: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationPartnerUpdateInput {
+  name: String
+  image: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationPatronInput {
+  qualifier: Patron_qualifier_MutationInput!
+  fullName: String!
+  title: String!
+  image: Int
+  domain: String!
+  updatedAt: String
+  createdAt: String
+}
+
+enum Patron_qualifier_MutationInput {
+  Mr
+  Mrs
+  Ms
+  Dr
+  Prof
+}
+
+input mutationPatronUpdateInput {
+  qualifier: PatronUpdate_qualifier_MutationInput
+  fullName: String
+  title: String
+  image: Int
+  domain: String
+  updatedAt: String
+  createdAt: String
+}
+
+enum PatronUpdate_qualifier_MutationInput {
+  Mr
+  Mrs
+  Ms
+  Dr
+  Prof
+}
+
+input mutationSessionElementInput {
+  title: String!
+  description: String!
+  image: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationSessionElementUpdateInput {
+  title: String
+  description: String
+  image: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationTestimonialInput {
+  quote: String!
+  authorFullName: String!
+  authorDescription: String!
+  authorImage: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationTestimonialUpdateInput {
+  quote: String
+  authorFullName: String
+  authorDescription: String
+  authorImage: Int
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationPayloadLockedDocumentInput {
+  document: PayloadLockedDocument_DocumentRelationshipInput
+  globalSlug: String
+  user: PayloadLockedDocument_UserRelationshipInput
+  updatedAt: String
+  createdAt: String
+}
+
+input PayloadLockedDocument_DocumentRelationshipInput {
+  relationTo: PayloadLockedDocument_DocumentRelationshipInputRelationTo
+  value: JSON
+}
+
+enum PayloadLockedDocument_DocumentRelationshipInputRelationTo {
+  users
+  pages
+  media
+  events
+  nc_member
+  nc
+  partner
+  patron
+  sessionElement
+  testimonials
+}
+
+input PayloadLockedDocument_UserRelationshipInput {
+  relationTo: PayloadLockedDocument_UserRelationshipInputRelationTo
+  value: JSON
+}
+
+enum PayloadLockedDocument_UserRelationshipInputRelationTo {
+  users
+}
+
+input mutationPayloadLockedDocumentUpdateInput {
+  document: PayloadLockedDocumentUpdate_DocumentRelationshipInput
+  globalSlug: String
+  user: PayloadLockedDocumentUpdate_UserRelationshipInput
+  updatedAt: String
+  createdAt: String
+}
+
+input PayloadLockedDocumentUpdate_DocumentRelationshipInput {
+  relationTo: PayloadLockedDocumentUpdate_DocumentRelationshipInputRelationTo
+  value: JSON
+}
+
+enum PayloadLockedDocumentUpdate_DocumentRelationshipInputRelationTo {
+  users
+  pages
+  media
+  events
+  nc_member
+  nc
+  partner
+  patron
+  sessionElement
+  testimonials
+}
+
+input PayloadLockedDocumentUpdate_UserRelationshipInput {
+  relationTo: PayloadLockedDocumentUpdate_UserRelationshipInputRelationTo
+  value: JSON
+}
+
+enum PayloadLockedDocumentUpdate_UserRelationshipInputRelationTo {
+  users
 }
 
 input mutationPayloadPreferenceInput {
