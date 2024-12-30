@@ -1,16 +1,19 @@
-import Image, { StaticImageData } from 'next/image'
-import type { ReactNode } from 'react'
+import { toImageUrl } from '@/lib/to-image-url'
 import { cn } from '@/lib/utils'
+import { ClassValue } from 'clsx'
+import Image from 'next/image'
+import { BaseSessionElement } from '../_content'
+import { Media } from 'payload-types'
 
-interface props {
-  title: string
+export function SessionElementCard({
+  sessionElement,
+  reverse,
+  className,
+}: {
+  sessionElement: BaseSessionElement
   reverse?: boolean
-  children: ReactNode
-  imageURL: StaticImageData
-  className?: string
-}
-
-export function SessionElementCard({ title, reverse, children, imageURL, className }: props) {
+  className?: ClassValue
+}) {
   return (
     <div
       className={cn(
@@ -23,7 +26,7 @@ export function SessionElementCard({ title, reverse, children, imageURL, classNa
         <Image
           width={250}
           height={250}
-          src={imageURL}
+          src={toImageUrl(sessionElement.image as Media)}
           alt=""
           className="-rotate-3 h-[97%] w-[97%] -translate-x-4 -translate-y-4 content-center rounded-lg object-cover transition-all duration-300 group-hover:-rotate-6"
         />
@@ -31,10 +34,10 @@ export function SessionElementCard({ title, reverse, children, imageURL, classNa
       <div className="p-8 w-full md:w-2/3 3xl:w-3/4 transition-all duration-300 group-hover:scale-[1.02]">
         <div className={cn('flex', reverse && 'md:justify-end')}>
           <h2 className="bg-gradient-secondary bg-[length:0%_105%] group-hover:bg-[length:100%_105%] bg-no-repeat transition-[background-size] duration-500 mb-4 text-xl font-semibold xl:text-3xl">
-            {title}
+            {sessionElement.title}
           </h2>
         </div>
-        <p className="text-justify text-lg">{children}</p>
+        <p className="text-justify text-lg">{sessionElement.description}</p>
       </div>
     </div>
   )

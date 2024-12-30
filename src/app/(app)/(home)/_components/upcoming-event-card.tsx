@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toImageUrl } from '@/lib/to-image-url'
 
 export function UpcomingEventCard({
-  event: { title, startDate, description, image, actionText, actionUrl },
+  event: { title, startDate, shortDescription, cardImage, actionText, actionUrl },
 }: {
   event: Event
 }) {
@@ -18,7 +18,7 @@ export function UpcomingEventCard({
         <Image
           width={200}
           height={150}
-          src={toImageUrl(image)}
+          src={toImageUrl(cardImage)}
           className="hidden xl:block h-[14rem] w-full object-cover"
           alt=""
         />
@@ -34,7 +34,7 @@ export function UpcomingEventCard({
           <div className="ml-6 block xl:hidden mt-1 mb-2.5 h-1 w-8 bg-orange-500">&nbsp;</div>
           <CardContent className="flex flex-col justify-between">
             <p className="mt-2 xl:mt-3 pb-6 leading-normal text-justify tracking-tight">
-              {description}
+              {shortDescription}
             </p>
             {actionText && (
               <Link className="w-full mt-3 flex justify-center" href={actionUrl ?? ''}>

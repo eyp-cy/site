@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 interface props {
-  className: string
+  className?: string
   backdrop?: string
   children: ReactNode
 }
