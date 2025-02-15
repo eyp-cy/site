@@ -6,13 +6,14 @@ import { toImageUrl } from '@/lib/utils/to-image-url'
 import { SessionElementCard } from '../_components'
 import { getEventBySlug, getEvents } from '../_content'
 
-export const revalidate = 3600
-export const dynamicParams = true
+// export const revalidate = 3600
+// export const dynamicParams = true
+export const dynamic = 'force-dynamic'
 
-export async function generateStaticParams() {
-  const events = await getEvents()
-  return events.map((e) => ({ slug: encodeURIComponent(e.title) }))
-}
+// export async function generateStaticParams() {
+//   const events = await getEvents()
+//   return events.map((e) => ({ slug: encodeURIComponent(e.title) }))
+// }
 
 type PageParams = Promise<{ slug: string }>
 
