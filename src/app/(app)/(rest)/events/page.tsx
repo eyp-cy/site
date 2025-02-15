@@ -6,6 +6,7 @@ import { CoreSessionElement, getCoreEvents, getSessionElements } from './_conten
 import { CORE_EVENTS } from '@/content/core-events'
 
 export const metadata: Metadata = { title: 'Events' }
+export const dynamic = 'force-dynamic'
 
 export default async function Page() {
   const events = await getCoreEvents()
