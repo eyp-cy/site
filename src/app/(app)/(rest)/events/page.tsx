@@ -2,12 +2,13 @@ import { Metadata } from 'next'
 
 import { ActionButton, Container, Title, WaveDivider } from '@/components'
 import { EventTypeCard, SessionElementCard } from './_components'
-import { CoreSessionElement, EVENTS, getEvents, getSessionElements } from './_content'
+import { CoreSessionElement, getCoreEvents, getSessionElements } from './_content'
+import { CORE_EVENTS } from '@/content/core-events'
 
 export const metadata: Metadata = { title: 'Events' }
 
 export default async function Page() {
-  const events = await getEvents()
+  const events = await getCoreEvents()
 
   const sessionElements = await getSessionElements()
 
@@ -17,29 +18,26 @@ export default async function Page() {
         <div className=" mb-10 md:mb-3 flex justify-center lg:justify-start">
           <Title text="Our Flagship Events" order="h1" />
         </div>
-        <div className="flex shrink flex-col items-center gap-16 xl:grid xl:grid-cols-12 xl:grid-rows-4">
-          <EventTypeCard
+        <div className="flex shrink mt-20 flex-col items-center gap-16 xl:grid xl:grid-cols-12 xl:grid-rows-4">
+          {/* <EventTypeCard
             className=" col-span-9 col-start-1 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            // event={events[EVENTS.PRE_SELECTION_DAYS]}
-            event={events[EVENTS.DAYS_OF_EYP]}
-          />
+            event={events[CORE_EVENTS.PRE_SELECTION_DAYS.id]}
+          /> */}
 
           <EventTypeCard
             className=" col-span-9 col-start-2 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            event={events[EVENTS.DAYS_OF_EYP]}
+            event={events[CORE_EVENTS.DAYS_OF_EYP.id]}
           />
 
-          <EventTypeCard
+          {/* <EventTypeCard
             className=" col-span-9 col-start-3 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            // event={events[EVENTS.YOUTH_SUMMIT]}
-            event={events[EVENTS.DAYS_OF_EYP]}
+            event={events[CORE_EVENTS.YOUTH_SUMMIT.id]}
           />
 
           <EventTypeCard
             className=" col-span-9 col-start-4 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            // event={events[EVENTS.NATIONAL_SESSION]}
-            event={events[EVENTS.DAYS_OF_EYP]}
-          />
+            event={events[CORE_EVENTS.NATIONAL_SESSION.id]}
+          /> */}
         </div>
         <div className="mt-40 mb-10 md:mb-3 flex justify-center lg:justify-start">
           <Title text="Other Events and Activities" order="h2" />

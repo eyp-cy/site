@@ -9,9 +9,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { dWhoWeAre1, dWhoWeAre2, dWhoWeAre3 } from './_assets'
 import { TestimonialCard, UpcomingEventCard } from './_components'
 import { getTestimonials, getUpcomingEvents } from './_content'
+import { SITE_IMAGE } from '@/content/images'
 
 export const metadata: Metadata = { title: 'EYP CY - Home' }
 export const dynamic = 'force-dynamic'
@@ -64,9 +64,9 @@ export default async function Home() {
           <ImageGrid.Focus
             flow="rhs"
             images={[
-              { src: dWhoWeAre1, alt: '' },
-              { src: dWhoWeAre3, alt: '' },
-              { src: dWhoWeAre2, alt: '' },
+              { src: SITE_IMAGE.home.whoWeAre1, alt: '' },
+              { src: SITE_IMAGE.home.whoWeAre2, alt: '' },
+              { src: SITE_IMAGE.home.whoWeAre3, alt: '' },
             ]}
           />
         </div>

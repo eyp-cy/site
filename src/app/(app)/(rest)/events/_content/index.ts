@@ -1,45 +1,50 @@
 import { Event, Media } from '@/payload-types'
 import { z } from 'zod'
 
+import { CORE_EVENTS } from '@/content/core-events'
 import { payload } from '@/lib/db'
 
-export const EVENTS = {
-  DAYS_OF_EYP: 'days-of-eyp',
-  NATIONAL_SESSION: 'national-session',
-  PRE_SELECTION_DAYS: 'pre-selection-days',
-  YOUTH_SUMMIT: 'youth-summit',
-} as const
-
-export async function getEvents() {
+export async function getCoreEvents() {
   const mainEvents = await payload.find({
     collection: 'events',
-    where: {
-      slug: { in: Object.values(EVENTS) },
-    },
-    sort: 'slug',
+    where: { title: { in: Object.values(CORE_EVENTS).map(({ title }) => title) } },
+    sort: 'title',
   })
 
   const eventData = mainEvents.docs.map((event) => ({
-    slug: event.slug!,
     title: event.title,
     logo: event.logo! as Media,
     description: event.shortDescription,
   }))
 
   return {
-    [EVENTS.DAYS_OF_EYP]: eventData[0],
-    [EVENTS.PRE_SELECTION_DAYS]: eventData[2],
-    [EVENTS.NATIONAL_SESSION]: eventData[1],
-    [EVENTS.YOUTH_SUMMIT]: eventData[3],
+    [CORE_EVENTS.DAYS_OF_EYP.id]: eventData[0],
+    [CORE_EVENTS.PRE_SELECTION_DAYS.id]: eventData[2],
+    [CORE_EVENTS.NATIONAL_SESSION.id]: eventData[1],
+    [CORE_EVENTS.YOUTH_SUMMIT.id]: eventData[3],
   }
 }
 
-export async function getEvent(eventSlug: string) {
+export async function getEvents() {
+  const mainEvents = await payload.find({
+    collection: 'events',
+    where: { title: { in: Object.values(CORE_EVENTS).map(({ title }) => title) } },
+    sort: 'title',
+  })
+
+  return mainEvents.docs.map((event) => ({
+    title: event.title,
+    logo: event.logo! as Media,
+    description: event.shortDescription,
+  }))
+}
+
+export async function getEventBySlug(eventSlug: string) {
+  const eventTitle = decodeURIComponent(eventSlug)
+
   const content = await payload.find({
     collection: 'events',
-    where: {
-      slug: { equals: eventSlug },
-    },
+    where: { title: { equals: eventTitle } },
   })
 
   if (content.docs.length !== 1) {
@@ -47,6 +52,7 @@ export async function getEvent(eventSlug: string) {
   }
   const event = content.docs[0]
   return {
+    title: eventTitle,
     description: event.longDescription!,
     sessionElements: extractSessionElements(event),
     logo: event.logo!,

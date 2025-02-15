@@ -66,11 +66,11 @@ function MobileNav() {
                 Home
               </Link>
               <Drawer
-                mainItem="About Us"
+                mainItem={{ displayName: 'About Us', slug: 'about-us' }}
                 items={['Patrons & Partners', 'Impact', 'National Committee', 'EYP Network']}
               />
               <Drawer
-                mainItem="Events"
+                mainItem={{ displayName: 'Events', slug: 'events' }}
                 items={[
                   'Pre-Selection Days',
                   'Days of EYP',
@@ -79,7 +79,13 @@ function MobileNav() {
                   'Other Events & Activities',
                 ]}
               />
-              <Drawer mainItem="Members & Alumni" items={['Schemes', 'Internal Affairs']} />
+              <Drawer
+                mainItem={{
+                  displayName: 'Members & Alumni',
+                  slug: encodeURIComponent('Members & Alumni'),
+                }}
+                items={['Schemes', 'Internal Affairs']}
+              />
               <Link className="text-white text-2xl" href="/external-affairs">
                 External Relations
               </Link>
@@ -104,11 +110,11 @@ function DesktopNav() {
         Home
       </a> */}
       <Dropdown
-        mainItem="About Us"
+        mainItem={{ displayName: 'About Us', slug: 'about-us' }}
         items={['Patrons & Partners', 'Impact', 'National Committee', 'EYP Network']}
       />
       <Dropdown
-        mainItem="Events"
+        mainItem={{ displayName: 'Events', slug: 'events' }}
         items={[
           'Pre-Selection Days',
           'Days of EYP',
@@ -117,7 +123,10 @@ function DesktopNav() {
           'Other Events & Activities',
         ]}
       />
-      <Dropdown mainItem="Members & Alumni" items={['Schemes', 'Internal Affairs']} />
+      <Dropdown
+        mainItem={{ displayName: 'Members & Alumni', slug: encodeURIComponent('Members & Alumni') }}
+        items={['Schemes', 'Internal Affairs']}
+      />
       <a
         className="cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
         href="/external-affairs"

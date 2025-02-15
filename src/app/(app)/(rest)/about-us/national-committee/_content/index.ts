@@ -1,8 +1,6 @@
 import { Nc, NcMember } from '@/payload-types'
 
 import { payload } from '@/lib/db'
-export { nationalCommittee } from './national-committee'
-export { previousNationalCommittees } from './previous-boards'
 
 export async function getCurrentNCMembers() {
   const currentYear = 2025

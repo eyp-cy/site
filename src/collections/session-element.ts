@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const SessionElementCollection: CollectionConfig = {
+export const SessionElements: CollectionConfig = {
   slug: 'sessionElement',
   admin: {
     useAsTitle: 'title',

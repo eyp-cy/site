@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const NC_Collection: CollectionConfig = {
+export const NCs: CollectionConfig = {
   slug: 'nc',
   labels: {
     singular: 'NC',

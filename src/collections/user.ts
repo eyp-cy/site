@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const UserCollection: CollectionConfig = {
+export const Users: CollectionConfig = {
   slug: 'users',
   auth: true,
   access: {

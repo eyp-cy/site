@@ -2,25 +2,10 @@ import { BookIcon, Globe, MessageCircle, PenIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { Container, Divider, ImageGrid, Title, WaveDivider } from '@/components'
-import {
-  dAboutUs1,
-  dAboutUs2,
-  dAboutUs3,
-  dHowWeDoWhatWeDo1,
-  dHowWeDoWhatWeDo2,
-  dHowWeDoWhatWeDoTemp,
-  dOurMission1,
-  dOurMission2,
-  dOurMission3,
-  whatWeDo1,
-  whatWeDo2,
-  whatWeDo3,
-  whatWeDo4,
-} from './_assets'
 import { WhatWeDoCard } from './_components'
+import { SITE_IMAGE } from '@/content/images'
 
 export const metadata: Metadata = { title: 'About Us' }
-export const runtime = 'edge'
 
 export default function AboutUs() {
   return (
@@ -44,15 +29,15 @@ export default function AboutUs() {
           <ImageGrid.Focus
             flow="lhs"
             images={[
-              { src: dAboutUs1, alt: '' },
-              { src: dAboutUs2, alt: '' },
-              { src: dAboutUs3, alt: '' },
+              { src: SITE_IMAGE.about.img1, alt: '' },
+              { src: SITE_IMAGE.about.img2, alt: '' },
+              { src: SITE_IMAGE.about.img3, alt: '' },
             ]}
           />
         </div>
       </Container>
       <Container className="block mt-16 sm:hidden">
-        <Image className="w-full" width={200} height={150} src={dAboutUs2} alt="" />
+        <Image className="w-full" width={200} height={150} src={SITE_IMAGE.about.img2} alt="" />
       </Container>
       <Divider className="mt-20 mb-32" />
       <Container className="mb-20 flex items-center">
@@ -60,9 +45,9 @@ export default function AboutUs() {
           <ImageGrid.Focus
             flow="rhs"
             images={[
-              { src: dOurMission1, alt: '' },
-              { src: dOurMission2, alt: '' },
-              { src: dOurMission3, alt: '' },
+              { src: SITE_IMAGE.about.ourMission1, alt: '' },
+              { src: SITE_IMAGE.about.ourMission2, alt: '' },
+              { src: SITE_IMAGE.about.ourMission3, alt: '' },
             ]}
           />
         </div>
@@ -87,7 +72,7 @@ export default function AboutUs() {
           <WhatWeDoCard
             title="Open Forum for Youth"
             info="We provide a forum for young people to develop and express their opinions on European political and social issues in an open and welcoming environment."
-            imageURL={whatWeDo1}
+            imageURL={SITE_IMAGE.home.whatWeDo1}
           >
             <BookIcon className="w-7 p-0.5 text-white" />
           </WhatWeDoCard>
@@ -95,7 +80,7 @@ export default function AboutUs() {
           <WhatWeDoCard
             title="Intercultural Dialogue"
             info="Through the EYP international network, we support intercultural understanding and peacebuilding by connecting young Cypriots with other Europeans from different backgrounds to share ideas, opinions and practices."
-            imageURL={whatWeDo2}
+            imageURL={SITE_IMAGE.home.whatWeDo2}
           >
             <MessageCircle className="w-7 p-0.5 text-white" />
           </WhatWeDoCard>
@@ -103,7 +88,7 @@ export default function AboutUs() {
           <WhatWeDoCard
             title="Skills Development"
             info="We present young people across Europe with diverse opportunities for personal growth and skills development through non-formal and peer-led educational activities."
-            imageURL={whatWeDo3}
+            imageURL={SITE_IMAGE.home.whatWeDo3}
           >
             <PenIcon className="w-7 p-0.5 text-white" />
           </WhatWeDoCard>
@@ -111,7 +96,7 @@ export default function AboutUs() {
           <WhatWeDoCard
             title="Network of Changemakers"
             info="We create a network of the next generation of diverse, young changemakers, equipped with the knowledge and skills needed to positively shape the world around them."
-            imageURL={whatWeDo4}
+            imageURL={SITE_IMAGE.home.whatWeDo4}
           >
             <Globe className="w-7 p-0.5 text-white" />
           </WhatWeDoCard>
@@ -144,15 +129,21 @@ export default function AboutUs() {
           <ImageGrid.Focus
             flow="lhs"
             images={[
-              { src: dHowWeDoWhatWeDo1, alt: '' },
-              { src: dHowWeDoWhatWeDo2, alt: '' },
-              { src: dHowWeDoWhatWeDoTemp, alt: '' },
+              { src: SITE_IMAGE.about.howWeDoWhatWeDo1, alt: '' },
+              { src: SITE_IMAGE.about.howWeDoWhatWeDo2, alt: '' },
+              { src: SITE_IMAGE.about.howWeDoWhatWeDo3, alt: '' },
             ]}
           />
         </div>
       </Container>
       <Container className="block mt-4 xs:mt-10 mb-16 sm:hidden">
-        <Image className="w-full" width={200} height={150} src={dHowWeDoWhatWeDo2} alt="" />
+        <Image
+          className="w-full"
+          width={200}
+          height={150}
+          src={SITE_IMAGE.about.howWeDoWhatWeDo2}
+          alt=""
+        />
       </Container>
       <div className="flex sm:hidden lg-xl:flex justify-center mt-20 lg-xl:mt-14 mb-32">
         <div className="border-t-2 w-1/2 border-gray-300/50">&nbsp;</div>

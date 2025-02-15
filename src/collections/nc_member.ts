@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const NC_MemberCollection: CollectionConfig = {
+export const NC_Members: CollectionConfig = {
   slug: 'nc_member',
   labels: {
     singular: 'NC Member',

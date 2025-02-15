@@ -35,13 +35,13 @@ export function Breadcrumbs() {
                 {idx !== segments.length - 1 ? (
                   <Link
                     href={`/${segments.slice(0, idx + 1).join('/')}`}
-                    className="hover:text-secondary hover:underline"
+                    className="hover:text-secondary capitalize hover:underline"
                     prefetch={false}
                   >
-                    {segment}
+                    {decodeURIComponent(segment)}
                   </Link>
                 ) : (
-                  <span>{segment}</span>
+                  <p className="capitalize">{decodeURIComponent(segment)}</p>
                 )}
               </BreadcrumbPage>
             </BreadcrumbItem>

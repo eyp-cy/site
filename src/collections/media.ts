@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const MediaCollection: CollectionConfig = {
+export const Media: CollectionConfig = {
   slug: 'media',
   upload: true,
   fields: [

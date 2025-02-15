@@ -38,7 +38,7 @@
       "source.fixAll.eslint": "explicit"
     }
   },
-  "cSpell.words": ["headlessui", "importmap", "payloadcms"],
+  "cSpell.words": ["headlessui", "importmap", "payloadcms", "TEAMBUILDING"],
   "material-icon-theme.folders.associations": {
     "actions": "generator",
     "_actions": "generator"

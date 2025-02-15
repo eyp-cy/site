@@ -1,7 +1,6 @@
 import { CollectionConfig } from 'payload'
-import { formatSlug } from './utils'
 
-export const EventCollection: CollectionConfig = {
+export const Events: CollectionConfig = {
   slug: 'events',
   admin: {
     useAsTitle: 'title',
@@ -82,17 +81,6 @@ export const EventCollection: CollectionConfig = {
           required: false,
         },
       ],
-    },
-    {
-      name: 'slug',
-      label: 'Slug',
-      type: 'text',
-      admin: {
-        position: 'sidebar',
-      },
-      hooks: {
-        beforeValidate: [formatSlug('name')],
-      },
     },
   ],
 }

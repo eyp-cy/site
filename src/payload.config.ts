@@ -8,16 +8,16 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import {
-  EventCollection,
-  MediaCollection,
-  NC_Collection,
-  NC_MemberCollection,
-  PagesCollection,
-  PartnerCollection,
-  PatronCollection,
-  SessionElementCollection,
-  TestimonialCollection,
-  UserCollection,
+  Events,
+  Media,
+  NC_Members,
+  NCs,
+  Pages,
+  Partners,
+  Patrons,
+  SessionElements,
+  Testimonials,
+  Users,
 } from './collections'
 
 const filename = fileURLToPath(import.meta.url)
@@ -25,25 +25,25 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    user: UserCollection.slug,
+    user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
 
   collections: [
-    // --- Core Collections ---
-    UserCollection,
-    PagesCollection,
-    MediaCollection,
-    // --- Custom Collections ---
-    EventCollection,
-    NC_MemberCollection,
-    NC_Collection,
-    PartnerCollection,
-    PatronCollection,
-    SessionElementCollection,
-    TestimonialCollection,
+    // --- Core  ---
+    Users,
+    Pages,
+    Media,
+    // --- Custom  ---
+    Events,
+    NC_Members,
+    NCs,
+    Partners,
+    Patrons,
+    SessionElements,
+    Testimonials,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -67,7 +67,7 @@ export default buildConfig({
       ? [
           s3Storage({
             collections: {
-              [MediaCollection.slug]: true,
+              [Media.slug]: true,
             },
             bucket: 'eyp-cy-uploads',
             config: {
@@ -83,7 +83,7 @@ export default buildConfig({
         ]
       : [
           vercelBlobStorage({
-            collections: { [MediaCollection.slug]: true },
+            collections: { [Media.slug]: true },
             token: process.env.BLOB_READ_WRITE_TOKEN || '',
           }),
         ],

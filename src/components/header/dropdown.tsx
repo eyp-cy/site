@@ -1,7 +1,5 @@
-import { slugify } from '@/lib/utils'
-
 interface props {
-  mainItem: string
+  mainItem: { displayName: string; slug: string }
   items: string[]
 }
 
@@ -11,9 +9,9 @@ export function Dropdown({ mainItem, items }: props) {
       <div className="group relative inline-block">
         <a
           className="cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
-          href={`/${slugify(mainItem)}`}
+          href={`/${encodeURIComponent(mainItem.slug)}`}
         >
-          {mainItem}
+          {mainItem.displayName}
         </a>
         <div className="hidden absolute z-10 group-hover:block pt-2">
           <div className="z-2 top-9 mt-2 rounded-xl backdrop-blur-sm bg-primary-900/60 p-2">
@@ -21,7 +19,7 @@ export function Dropdown({ mainItem, items }: props) {
               <a
                 key={i}
                 className="block w-max cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
-                href={`/${slugify(mainItem)}/${slugify(item)}`}
+                href={`/${encodeURIComponent(mainItem.slug)}/${encodeURIComponent(item)}`}
               >
                 {item}
               </a>

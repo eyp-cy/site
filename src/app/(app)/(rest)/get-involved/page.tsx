@@ -3,7 +3,6 @@ import { Container, Divider, Title } from '@/components'
 import { CategoryCard, ContactForm } from './_components'
 
 export const metadata: Metadata = { title: 'Get Involved' }
-export const runtime = 'edge'
 
 export default function GetInvolved() {
   return (

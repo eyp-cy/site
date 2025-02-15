@@ -157,7 +157,6 @@ export interface Event {
         id?: string | null;
       }[]
     | null;
-  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -394,7 +393,6 @@ export interface EventsSelect<T extends boolean = true> {
         sessionElement?: T;
         id?: T;
       };
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

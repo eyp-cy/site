@@ -40,5 +40,8 @@ next-env.d.ts
 
 .env
 
+*.t.*
+
 /media
-/media-offline
+/public/assets/cms
+/public/assets/cms-maybe

@@ -1,10 +1,9 @@
 import { Metadata } from 'next'
 import { Container, Divider, Title } from '@/components'
-import { impact1, impact2, impact3, impact4, impact5, impact6 } from './_assets'
 import { InfoCard } from './_components'
+import { SITE_IMAGE } from '@/content/images'
 
 export const metadata: Metadata = { title: 'Impact' }
-export const runtime = 'edge'
 
 export default function Impact() {
   return (
@@ -29,13 +28,20 @@ export default function Impact() {
       </Container>
       <Divider className="my-32" />
       <Container className="mb-28 md:mb-16 lg:mb-32 flex flex-col gap-20 sm:gap-24 xl:gap-36 3xl:gap-56">
-        <InfoCard title="Forming opinions and solving current challenges" imageURL={impact1}>
+        <InfoCard
+          title="Forming opinions and solving current challenges"
+          imageURL={SITE_IMAGE.impact.img1}
+        >
           Every year, the EYP Cyprus engages 500+ young people from across Cyprus and Europe in a
           welcoming, independent, non-partisan environment to develop and express their opinions and
           put forth their suggestions to tackle current social, economic, legal, political and
           environmental challenges.
         </InfoCard>
-        <InfoCard title="Developing skills and growing as a person" imageURL={impact2} reversed>
+        <InfoCard
+          title="Developing skills and growing as a person"
+          imageURL={SITE_IMAGE.impact.img2}
+          reversed
+        >
           EYP Cyprus encourages independent thinking and initiative amongst young people and
           facilitates the learning of crucial social and professional skills. These include
           teamwork, tolerance and problem-solving, as well as communication and leadership skills.
@@ -46,7 +52,7 @@ export default function Impact() {
         </InfoCard>
         <InfoCard
           title="Engaging with current topics in dialogue with decision-makers"
-          imageURL={impact3}
+          imageURL={SITE_IMAGE.impact.img3}
         >
           During most of our events, we work hard to bring young people together with decision
           makers and experts. Participants at our events often have the chance to discuss in a round
@@ -57,7 +63,7 @@ export default function Impact() {
         </InfoCard>
         <InfoCard
           title="Building a network and facilitating intercultural understanding"
-          imageURL={impact4}
+          imageURL={SITE_IMAGE.impact.img4}
           reversed
         >
           Through taking part in an EYP Cyprus event, young people have the chance to join a network
@@ -67,7 +73,7 @@ export default function Impact() {
           coming from 40+ European countries, young people through our activities also have a chance
           to develop their intercultural understanding and build international friendships.
         </InfoCard>
-        <InfoCard title="Empowering young, active citizens" imageURL={impact5}>
+        <InfoCard title="Empowering young, active citizens" imageURL={SITE_IMAGE.impact.img5}>
           As a result of our events, more than 90% of participants indicate an increased willingness
           to actively get involved in society and politics. Participants have the chance through
           discussing current affairs to become more passionate around them - evident from how many
@@ -75,7 +81,11 @@ export default function Impact() {
           of active citizenship which translates to many of them becoming volunteers in our
           organisation, helping run and facilitate our events.
         </InfoCard>
-        <InfoCard title="Traveling and International Opportunities" imageURL={impact6} reversed>
+        <InfoCard
+          title="Traveling and International Opportunities"
+          imageURL={SITE_IMAGE.impact.img6}
+          reversed
+        >
           Through joining some of our events, participants have the chance to be selected and
           participate in International Sessions in 40+ European countries. We give the chance to
           over 50+ of our participants and alumni to travel abroad to international conferences and

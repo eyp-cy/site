@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-import { COMPANY_NAME, CONTACT_EMAIL, INBOX_EMAIL } from '@/content/config'
+import { ORG_NAME, CONTACT_EMAIL, INBOX_EMAIL } from '@/content/config'
 import { emailFormSchema } from '@/lib/schemas/email'
 
 if (!process.env.RESEND_API_KEY) {
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const { name, email, subject, message } = result.data
 
     const { data, error } = await resend.emails.send({
-      from: `${COMPANY_NAME} <${INBOX_EMAIL}>`, // TODO: verify domain in Resend
+      from: `${ORG_NAME} <${INBOX_EMAIL}>`, // TODO: verify domain in Resend
       to: CONTACT_EMAIL,
       replyTo: email,
       subject: `[Contact Form] ${subject}`,

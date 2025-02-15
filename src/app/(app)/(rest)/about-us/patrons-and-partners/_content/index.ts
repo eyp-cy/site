@@ -1,8 +1,5 @@
 import { payload } from '@/lib/db'
 
-export { partnerData } from './partners'
-export { patronData } from './patrons'
-
 export async function getPatrons() {
   const patronsCY = await payload.find({
     collection: 'patron',

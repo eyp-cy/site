@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const PatronCollection: CollectionConfig = {
+export const Patrons: CollectionConfig = {
   slug: 'patron',
   admin: {
     useAsTitle: 'fullName',
