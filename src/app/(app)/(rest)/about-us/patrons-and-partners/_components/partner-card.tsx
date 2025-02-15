@@ -1,6 +1,6 @@
 import { toImageUrl } from '@/lib/to-image-url'
 import Image, { StaticImageData } from 'next/image'
-import { Partner } from 'payload-types'
+import { Partner } from '@/payload-types'
 
 interface props {
   name: string

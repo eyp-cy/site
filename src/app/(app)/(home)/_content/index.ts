@@ -1,4 +1,4 @@
-import { payload } from '@/cms/db'
+import { payload } from '@/lib/db'
 
 export async function getUpcomingEvents() {
   const upcomingEvents = await payload.find({

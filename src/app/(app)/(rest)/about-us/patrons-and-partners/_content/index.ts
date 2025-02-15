@@ -1,4 +1,4 @@
-import { payload } from '@/cms/db'
+import { payload } from '@/lib/db'
 
 export { partnerData } from './partners'
 export { patronData } from './patrons'

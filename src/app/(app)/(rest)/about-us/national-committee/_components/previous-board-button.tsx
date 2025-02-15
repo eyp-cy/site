@@ -1,4 +1,4 @@
-import { Nc } from 'payload-types'
+import { Nc } from '@/payload-types'
 
 import { Dialog, DialogContent, DialogHeader, DialogTrigger, Title } from '@/components'
 import { extractMembers } from '../_content'

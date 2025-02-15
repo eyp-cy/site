@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { NcMember } from 'payload-types'
+import { NcMember } from '@/payload-types'
 
 import { toImageUrl } from '@/lib/to-image-url'
 

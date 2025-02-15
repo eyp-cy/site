@@ -1,8 +1,8 @@
-import Image, { StaticImageData } from 'next/image'
-import { cn, slugify } from '@/lib/utils'
-import { ClassValue } from 'clsx'
-import { Media } from 'payload-types'
 import { toImageUrl } from '@/lib/to-image-url'
+import { cn } from '@/lib/utils'
+import { Media } from '@/payload-types'
+import { ClassValue } from 'clsx'
+import Image from 'next/image'
 
 export function EventTypeCard({
   event,

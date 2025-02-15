@@ -1,6 +1,6 @@
 import { toImageUrl } from '@/lib/to-image-url'
 import Image from 'next/image'
-import { Testimonial } from 'payload-types'
+import { Testimonial } from '@/payload-types'
 
 function QuoteIcon({ className }: { className: string }) {
   return (

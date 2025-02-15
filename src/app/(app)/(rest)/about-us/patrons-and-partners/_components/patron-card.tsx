@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { Patron } from 'payload-types'
+import { Patron } from '@/payload-types'
 import { toImageUrl } from '@/lib/to-image-url'
 
 export function PatronCard({ patron, invertColors }: { patron: Patron; invertColors?: boolean }) {

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { ClassValue } from 'clsx'
 import Image from 'next/image'
 import { BaseSessionElement } from '../_content'
-import { Media } from 'payload-types'
+import { Media } from '@/payload-types'
 
 export function SessionElementCard({
   sessionElement,

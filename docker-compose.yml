@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: eyp-cy
+      POSTGRES_USER: eyp-cy
+      POSTGRES_PASSWORD: eyp-cy_local
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U eyp-cy']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      MINIO_ROOT_USER: minio_user
+      MINIO_ROOT_PASSWORD: minio_password
+    command: server --console-address ":9001" /data
+    volumes:
+      - minio_data:/data
+    networks:
+      - eyp-cy-network
+
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    networks:
+      - eyp-cy-network
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc alias set myminio http://minio:9000 minio_user minio_password;
+      /usr/bin/mc mb myminio/eyp-cy-uploads;
+      /usr/bin/mc policy set public myminio/eyp-cy-uploads;
+      exit 0;
+      "
+
+networks:
+  eyp-cy-network:
+
+volumes:
+  postgres_data:
+  minio_data:

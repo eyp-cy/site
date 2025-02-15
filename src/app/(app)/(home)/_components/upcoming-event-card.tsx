@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Event } from 'payload-types'
+import { Event } from '@/payload-types'
 import { ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'

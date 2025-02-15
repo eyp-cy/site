@@ -1,6 +1,6 @@
-import { Nc, NcMember } from 'payload-types'
+import { Nc, NcMember } from '@/payload-types'
 
-import { payload } from '@/cms/db'
+import { payload } from '@/lib/db'
 export { nationalCommittee } from './national-committee'
 export { previousNationalCommittees } from './previous-boards'
 

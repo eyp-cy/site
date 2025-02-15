@@ -1,7 +1,7 @@
-import { Event, Media } from 'payload-types'
+import { Event, Media } from '@/payload-types'
 import { z } from 'zod'
 
-import { payload } from '@/cms/db'
+import { payload } from '@/lib/db'
 
 export const EVENTS = {
   DAYS_OF_EYP: 'days-of-eyp',
