@@ -1,29 +1,66 @@
-import sendgrid from "@sendgrid/mail";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
 
-export async function POST(req: Request) {
-  sendgrid.setApiKey(process.env.SENDGRID_API_KEY!);
+import { COMPANY_NAME, CONTACT_EMAIL, INBOX_EMAIL } from '@/content/config'
+import { emailFormSchema } from '@/lib/schemas/email'
 
-  const data = await req.json();
-  const { name, email, subject, text } = data;
+if (!process.env.RESEND_API_KEY) {
+  throw new Error('Missing required environment variables')
+}
 
-  const msg = {
-    to: "info@eypcyprus.com",
-    from: "info@eypcyprus.com",
-    subject: `Contact Form - ${subject}`,
-    html: `<h2>You have a new contact form submission:</h2><p><strong>Name: </strong>${name}</p><p><strong>Email: </strong>${email}</p><p><strong>Subject: </strong>${subject}</p><p><strong>Message: </strong>${text}</p><div>This message was sent from <a href='https://eypcyprus.com/get-involved'>https://eypcyprus.com/get-involved</a></div>`,
-  };
+const resend = new Resend(process.env.RESEND_API_KEY)
 
+export async function POST(req: NextRequest) {
   try {
-    await sendgrid.send(msg);
+    const body = await req.json()
+
+    const result = emailFormSchema.safeParse(body)
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors
+      return NextResponse.json(
+        { error: 'Invalid form data', details: fieldErrors },
+        { status: 400 },
+      )
+    }
+
+    const { name, email, subject, message } = result.data
+
+    const { data, error } = await resend.emails.send({
+      from: `${COMPANY_NAME} <${INBOX_EMAIL}>`, // TODO: verify domain in Resend
+      to: CONTACT_EMAIL,
+      replyTo: email,
+      subject: `[Contact Form] ${subject}`,
+      html: `
+        <div>
+          <h2>New Contact Form Submission</h2>
+          <p><strong>From:</strong> ${name} (${email})</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong></p>
+          <p style="white-space: pre-wrap;">${message}</p>
+        </div>
+      `,
+    })
+
+    if (error) {
+      console.error('Resend error:', error)
+      return NextResponse.json(
+        { error: 'Failed to send email', details: error.message },
+        { status: 500 },
+      )
+    }
+
     return NextResponse.json({
-      status: 202,
-      data: "Message have been accepted for delivery.",
-    });
+      success: true,
+      message: 'Message sent successfully',
+      id: data?.id,
+    })
   } catch (error) {
-    return NextResponse.json({
-      status: 500,
-      data: "Something went wrong while delivering the message. Please try again later.",
-    });
+    console.error('Unexpected error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    return NextResponse.json(
+      { error: 'Failed to send email', details: errorMessage },
+      { status: 500 },
+    )
   }
 }

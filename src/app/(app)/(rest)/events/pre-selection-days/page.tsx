@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 
 import { Container, Divider, Title } from '@/components'
-import { toImageUrl } from '@/lib/to-image-url'
+import { toImageUrl } from '@/lib/utils/to-image-url'
 import { SessionElementCard } from '../_components'
 import { EVENTS, getEvent } from '../_content'
 

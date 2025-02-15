@@ -1,4 +1,4 @@
 import configPromise from '@/payload.config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 
-export const payload = await getPayloadHMR({ config: configPromise })
+export const payload = await getPayload({ config: configPromise })

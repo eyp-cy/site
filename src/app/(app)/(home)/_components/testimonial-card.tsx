@@ -1,4 +1,4 @@
-import { toImageUrl } from '@/lib/to-image-url'
+import { toImageUrl } from '@/lib/utils/to-image-url'
 import Image from 'next/image'
 import { Testimonial } from '@/payload-types'
 

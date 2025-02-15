@@ -41,7 +41,6 @@
   "cSpell.words": ["headlessui", "importmap", "payloadcms"],
   "material-icon-theme.folders.associations": {
     "actions": "generator",
-    "_actions": "generator",
-    "cms": "content"
+    "_actions": "generator"
   }
 }

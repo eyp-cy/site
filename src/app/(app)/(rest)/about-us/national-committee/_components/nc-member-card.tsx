@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { NcMember } from '@/payload-types'
 
-import { toImageUrl } from '@/lib/to-image-url'
+import { toImageUrl } from '@/lib/utils/to-image-url'
 
 export function NCMemberCard({ member: { fullName, position, image } }: { member: NcMember }) {
   return (

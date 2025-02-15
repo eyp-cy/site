@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { toImageUrl } from '@/lib/to-image-url'
+import { toImageUrl } from '@/lib/utils/to-image-url'
 
 export function UpcomingEventCard({
   event: { title, startDate, shortDescription, cardImage, actionText, actionUrl },

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment, useEffect, useState } from 'react'
 
-import { debounce } from '@/lib/debounce'
+import { debounce } from '@/lib/utils/debounce'
 import { cn } from '@/lib/utils'
 import { Drawer } from './drawer'
 import { Dropdown } from './dropdown'

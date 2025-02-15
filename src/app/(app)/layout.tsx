@@ -3,7 +3,7 @@ import React from 'react'
 import { Toaster } from 'sonner'
 
 import { Footer } from '@/components'
-import './globals.css'
+import '../globals.css'
 
 const sourceSans3 = Source_Sans_3({
   subsets: ['latin'],

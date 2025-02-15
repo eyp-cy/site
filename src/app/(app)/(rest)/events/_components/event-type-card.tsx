@@ -1,4 +1,4 @@
-import { toImageUrl } from '@/lib/to-image-url'
+import { toImageUrl } from '@/lib/utils/to-image-url'
 import { cn } from '@/lib/utils'
 import { Media } from '@/payload-types'
 import { ClassValue } from 'clsx'

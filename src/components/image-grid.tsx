@@ -29,13 +29,7 @@ const Focus = ({ images, flow }: focusGridProps) => {
             zIndex[i],
           )}
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            className="diamond-mask"
-            width={300 * ratio[i]}
-            height={300 * ratio[i]}
-          />
+          <Image src={image.src} alt={image.alt} width={300 * ratio[i]} height={300 * ratio[i]} />
         </div>
       ))}
     </div>
@@ -61,13 +55,7 @@ const Regular = ({ images, flow }: regularGridProps) => {
             zIndex[i],
           )}
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            className="diamond-mask"
-            width={300}
-            height={300}
-          />
+          <Image src={image.src} alt={image.alt} width={300} height={300} />
         </div>
       ))}
     </div>
@@ -78,31 +66,13 @@ const Test = () => {
   return (
     <div className="grid h-full w-full grid-cols-10 grid-rows-12 outline outline-pink-600">
       <div className="z-0 col-span-4 col-start-1 row-span-4 row-start-1 ">
-        <Image
-          src={'/assets/test-image.png'}
-          alt={''}
-          className="diamond-mask"
-          width={300}
-          height={300}
-        />
+        <Image src={'/assets/test-image.png'} alt={''} width={300} height={300} />
       </div>
       <div className="z-10 col-span-8 col-start-3 row-span-8 row-start-3 ">
-        <Image
-          src={'/assets/test-image.png'}
-          alt={''}
-          className="diamond-mask"
-          width={600}
-          height={600}
-        />
+        <Image src={'/assets/test-image.png'} alt={''} width={600} height={600} />
       </div>
       <div className="z-0 col-span-4 col-start-1 row-span-4 row-start-9 ">
-        <Image
-          src={'/assets/test-image.png'}
-          alt={''}
-          className="diamond-mask"
-          width={300}
-          height={300}
-        />
+        <Image src={'/assets/test-image.png'} alt={''} width={300} height={300} />
       </div>
     </div>
   )

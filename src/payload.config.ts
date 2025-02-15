@@ -54,7 +54,7 @@ export default buildConfig({
     process.env.NODE_ENV === 'development'
       ? vercelPostgresAdapter({
           pool: {
-            connectionString: 'postgresql://nostos:nostos_local@127.0.0.1:5432/nostos',
+            connectionString: 'postgresql://eyp-cy:eyp-cy_local@127.0.0.1:5432/eyp-cy',
           },
         })
       : vercelPostgresAdapter({
@@ -69,7 +69,7 @@ export default buildConfig({
             collections: {
               [MediaCollection.slug]: true,
             },
-            bucket: 'nostos-uploads',
+            bucket: 'eyp-cy-uploads',
             config: {
               endpoint: 'http://localhost:9000',
               credentials: {
