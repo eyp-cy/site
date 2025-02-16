@@ -6,9 +6,6 @@ export const NC_Members: CollectionConfig = {
     singular: 'NC Member',
     plural: 'NC Members',
   },
-  admin: {
-    useAsTitle: 'fullName',
-  },
   access: {
     create: () => true,
     update: () => true,
@@ -17,8 +14,9 @@ export const NC_Members: CollectionConfig = {
   },
   fields: [
     {
-      name: 'fullName',
-      type: 'text',
+      name: 'member',
+      type: 'relationship',
+      relationTo: 'member',
       required: true,
     },
     {
@@ -30,12 +28,6 @@ export const NC_Members: CollectionConfig = {
       name: 'quote',
       type: 'textarea',
       required: false,
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
     },
   ],
 }

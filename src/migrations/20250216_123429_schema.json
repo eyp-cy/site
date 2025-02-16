@@ -1,5 +1,5 @@
 {
-  "id": "a8487c6b-990a-4295-835a-7f0c2ea0c4fa",
+  "id": "da945587-64e1-447d-a5a3-5def13b68a8e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -114,82 +114,6 @@
             }
           ],
           "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.pages": {
-      "name": "pages",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "title": {
-          "name": "title",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "content": {
-          "name": "content",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {
-        "pages_updated_at_idx": {
-          "name": "pages_updated_at_idx",
-          "columns": [
-            {
-              "expression": "updated_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "pages_created_at_idx": {
-          "name": "pages_created_at_idx",
-          "columns": [
-            {
-              "expression": "created_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
           "concurrently": false,
           "method": "btree",
           "with": {}
@@ -735,8 +659,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.nc_member": {
-      "name": "nc_member",
+    "public.member": {
+      "name": "member",
       "schema": "",
       "columns": {
         "id": {
@@ -750,18 +674,6 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
-        },
-        "position": {
-          "name": "position",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "quote": {
-          "name": "quote",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
         },
         "image_id": {
           "name": "image_id",
@@ -785,11 +697,122 @@
         }
       },
       "indexes": {
-        "nc_member_image_idx": {
-          "name": "nc_member_image_idx",
+        "member_image_idx": {
+          "name": "member_image_idx",
           "columns": [
             {
               "expression": "image_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "member_updated_at_idx": {
+          "name": "member_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "member_created_at_idx": {
+          "name": "member_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "member_image_id_media_id_fk": {
+          "name": "member_image_id_media_id_fk",
+          "tableFrom": "member",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.nc_member": {
+      "name": "nc_member",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "member_id": {
+          "name": "member_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quote": {
+          "name": "quote",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "nc_member_member_idx": {
+          "name": "nc_member_member_idx",
+          "columns": [
+            {
+              "expression": "member_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -832,12 +855,12 @@
         }
       },
       "foreignKeys": {
-        "nc_member_image_id_media_id_fk": {
-          "name": "nc_member_image_id_media_id_fk",
+        "nc_member_member_id_member_id_fk": {
+          "name": "nc_member_member_id_member_id_fk",
           "tableFrom": "nc_member",
-          "tableTo": "media",
+          "tableTo": "member",
           "columnsFrom": [
-            "image_id"
+            "member_id"
           ],
           "columnsTo": [
             "id"
@@ -1706,12 +1729,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "pages_id": {
-          "name": "pages_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "media_id": {
           "name": "media_id",
           "type": "integer",
@@ -1720,6 +1737,12 @@
         },
         "events_id": {
           "name": "events_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "member_id": {
+          "name": "member_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -1822,21 +1845,6 @@
           "method": "btree",
           "with": {}
         },
-        "payload_locked_documents_rels_pages_id_idx": {
-          "name": "payload_locked_documents_rels_pages_id_idx",
-          "columns": [
-            {
-              "expression": "pages_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
         "payload_locked_documents_rels_media_id_idx": {
           "name": "payload_locked_documents_rels_media_id_idx",
           "columns": [
@@ -1857,6 +1865,21 @@
           "columns": [
             {
               "expression": "events_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_member_id_idx": {
+          "name": "payload_locked_documents_rels_member_id_idx",
+          "columns": [
+            {
+              "expression": "member_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1985,19 +2008,6 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "payload_locked_documents_rels_pages_fk": {
-          "name": "payload_locked_documents_rels_pages_fk",
-          "tableFrom": "payload_locked_documents_rels",
-          "tableTo": "pages",
-          "columnsFrom": [
-            "pages_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
         "payload_locked_documents_rels_media_fk": {
           "name": "payload_locked_documents_rels_media_fk",
           "tableFrom": "payload_locked_documents_rels",
@@ -2017,6 +2027,19 @@
           "tableTo": "events",
           "columnsFrom": [
             "events_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_member_fk": {
+          "name": "payload_locked_documents_rels_member_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "member",
+          "columnsFrom": [
+            "member_id"
           ],
           "columnsTo": [
             "id"

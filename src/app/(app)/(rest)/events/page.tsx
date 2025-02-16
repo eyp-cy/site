@@ -10,7 +10,6 @@ export const dynamic = 'force-dynamic'
 
 export default async function Page() {
   const events = await getCoreEvents()
-
   const sessionElements = await getSessionElements()
 
   return (
@@ -20,29 +19,33 @@ export default async function Page() {
           <Title text="Our Flagship Events" order="h1" />
         </div>
         <div className="flex shrink mt-20 flex-col items-center gap-16 xl:grid xl:grid-cols-12 xl:grid-rows-4">
-          {/* <EventTypeCard
-            className=" col-span-9 col-start-1 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            event={events[CORE_EVENTS.PRE_SELECTION_DAYS.id]}
-          /> */}
+          {Object.values(events).filter(Boolean).length === 4 && (
+            <>
+              <EventTypeCard
+                className=" col-span-9 col-start-1 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                event={events[CORE_EVENTS.PRE_SELECTION_DAYS.id]}
+              />
 
-          <EventTypeCard
-            className=" col-span-9 col-start-2 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            event={events[CORE_EVENTS.DAYS_OF_EYP.id]}
-          />
+              <EventTypeCard
+                className=" col-span-9 col-start-2 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                event={events[CORE_EVENTS.DAYS_OF_EYP.id]}
+              />
 
-          {/* <EventTypeCard
-            className=" col-span-9 col-start-3 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            event={events[CORE_EVENTS.YOUTH_SUMMIT.id]}
-          />
+              <EventTypeCard
+                className=" col-span-9 col-start-3 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                event={events[CORE_EVENTS.YOUTH_SUMMIT.id]}
+              />
 
-          <EventTypeCard
-            className=" col-span-9 col-start-4 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-            event={events[CORE_EVENTS.NATIONAL_SESSION.id]}
-          /> */}
+              <EventTypeCard
+                className=" col-span-9 col-start-4 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                event={events[CORE_EVENTS.NATIONAL_SESSION.id]}
+              />
+            </>
+          )}
         </div>
-        <div className="mt-40 mb-10 md:mb-3 flex justify-center lg:justify-start">
+        {/* <div className="mt-40 mb-10 md:mb-3 flex justify-center lg:justify-start">
           <Title text="Other Events and Activities" order="h2" />
-        </div>
+        </div> */}
       </Container>
       <WaveDivider.eventsTop />
       <Container backdrop="bg-primary-700" className="flex h-[30rem] flex-col justify-around pt-10">
@@ -66,19 +69,23 @@ export default async function Page() {
         </div>
 
         <div className="flex flex-col items-center justify-center gap-20 xl:gap-40">
-          <SessionElementCard
-            className=" w-full md-lg:w-5/6 max-w-5xl"
-            sessionElement={sessionElements[CoreSessionElement.TEAM_BUILDING]}
-          />
-          <SessionElementCard
-            className=" w-full md-lg:w-5/6 max-w-5xl"
-            sessionElement={sessionElements[CoreSessionElement.COMMITTEE_WORK]}
-            reverse
-          />
-          <SessionElementCard
-            className=" w-full md-lg:w-5/6 max-w-5xl"
-            sessionElement={sessionElements[CoreSessionElement.GENERAL_ASSEMBLY]}
-          />
+          {Object.values(sessionElements).filter(Boolean).length === 3 && (
+            <>
+              <SessionElementCard
+                className=" w-full md-lg:w-5/6 max-w-5xl"
+                sessionElement={sessionElements[CoreSessionElement.TEAM_BUILDING]}
+              />
+              <SessionElementCard
+                className=" w-full md-lg:w-5/6 max-w-5xl"
+                sessionElement={sessionElements[CoreSessionElement.COMMITTEE_WORK]}
+                reverse
+              />
+              <SessionElementCard
+                className=" w-full md-lg:w-5/6 max-w-5xl"
+                sessionElement={sessionElements[CoreSessionElement.GENERAL_ASSEMBLY]}
+              />
+            </>
+          )}
         </div>
       </Container>
     </>

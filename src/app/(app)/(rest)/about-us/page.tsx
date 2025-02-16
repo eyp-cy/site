@@ -1,9 +1,10 @@
 import { BookIcon, Globe, MessageCircle, PenIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { Container, Divider, ImageGrid, Title, WaveDivider } from '@/components'
+import { Container, Divider, Title, WaveDivider } from '@/components'
 import { WhatWeDoCard } from './_components'
 import { SITE_IMAGE } from '@/content/images'
+import { DiamondImageGrid } from '@/components/diamond-image-grid'
 
 export const metadata: Metadata = { title: 'About Us' }
 
@@ -26,12 +27,12 @@ export default function AboutUs() {
           </p>
         </div>
         <div className="hidden ml-20 md-lg:grid w-[35%] place-items-center">
-          <ImageGrid.Focus
+          <DiamondImageGrid
             flow="lhs"
             images={[
-              { src: SITE_IMAGE.about.img1, alt: '' },
-              { src: SITE_IMAGE.about.img2, alt: '' },
-              { src: SITE_IMAGE.about.img3, alt: '' },
+              { src: SITE_IMAGE.about.img1.src, alt: '' },
+              { src: SITE_IMAGE.about.img2.src, alt: '' },
+              { src: SITE_IMAGE.about.img3.src, alt: '' },
             ]}
           />
         </div>
@@ -42,12 +43,12 @@ export default function AboutUs() {
       <Divider className="mt-20 mb-32" />
       <Container className="mb-20 flex items-center">
         <div className="hidden mr-20 md-lg:grid w-[35%] place-items-center">
-          <ImageGrid.Focus
+          <DiamondImageGrid
             flow="rhs"
             images={[
-              { src: SITE_IMAGE.about.ourMission1, alt: '' },
-              { src: SITE_IMAGE.about.ourMission2, alt: '' },
-              { src: SITE_IMAGE.about.ourMission3, alt: '' },
+              { src: SITE_IMAGE.about.ourMission1.src, alt: '' },
+              { src: SITE_IMAGE.about.ourMission2.src, alt: '' },
+              { src: SITE_IMAGE.about.ourMission3.src, alt: '' },
             ]}
           />
         </div>
@@ -126,12 +127,12 @@ export default function AboutUs() {
           </p>
         </div>
         <div className="hidden ml-20 md-lg:grid w-[35%] place-items-center">
-          <ImageGrid.Focus
+          <DiamondImageGrid
             flow="lhs"
             images={[
-              { src: SITE_IMAGE.about.howWeDoWhatWeDo1, alt: '' },
-              { src: SITE_IMAGE.about.howWeDoWhatWeDo2, alt: '' },
-              { src: SITE_IMAGE.about.howWeDoWhatWeDo3, alt: '' },
+              { src: SITE_IMAGE.about.howWeDoWhatWeDo1.src, alt: '' },
+              { src: SITE_IMAGE.about.howWeDoWhatWeDo2.src, alt: '' },
+              { src: SITE_IMAGE.about.howWeDoWhatWeDo3.src, alt: '' },
             ]}
           />
         </div>

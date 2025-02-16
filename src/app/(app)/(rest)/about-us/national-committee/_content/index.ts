@@ -1,22 +1,25 @@
 import { Nc, NcMember } from '@/payload-types'
+import { getYear } from 'date-fns'
 
 import { payload } from '@/lib/db'
 
 export async function getCurrentNCMembers() {
-  const currentYear = 2025
-  //   const currentYear = getYear(new Date())
+  const currentYear = getYear(new Date())
 
   const currentNc = await payload.find({
     collection: 'nc',
     where: { year: { equals: currentYear } },
   })
-
-  return currentNc.docs.at(0)?.members?.flatMap((m) => m.member as unknown as NcMember) ?? []
+  return (
+    currentNc.docs
+      .at(0)
+      ?.members?.flatMap((m) => m.member)
+      .filter((m) => typeof m !== 'number') ?? []
+  )
 }
 
 export async function getPreviousNCs() {
-  const currentYear = 2025
-  //   const currentYear = getYear(new Date())
+  const currentYear = getYear(new Date())
 
   const ncs = await payload.find({
     collection: 'nc',

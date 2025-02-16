@@ -4,7 +4,6 @@ export { DebugOverlay } from './debug-overlay'
 export { Divider } from './divider'
 export { Footer } from './footer'
 export { Header } from './header'
-export { ImageGrid } from './image-grid'
 export { Title } from './title'
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
 export {

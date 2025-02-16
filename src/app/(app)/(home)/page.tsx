@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { Container, ImageGrid, Title, WaveDivider } from '@/components'
+import { Container, Title, WaveDivider } from '@/components'
 import {
   Carousel,
   CarouselContent,
@@ -12,6 +12,8 @@ import {
 import { TestimonialCard, UpcomingEventCard } from './_components'
 import { getTestimonials, getUpcomingEvents } from './_content'
 import { SITE_IMAGE } from '@/content/images'
+import { cn } from '@/lib/utils'
+import { DiamondImageGrid } from '@/components/diamond-image-grid'
 
 export const metadata: Metadata = { title: 'EYP CY - Home' }
 export const dynamic = 'force-dynamic'
@@ -61,12 +63,11 @@ export default async function Home() {
           </p>
         </div>
         <div className="ml-20 md-lg:grid w-[45%] place-items-center hidden">
-          <ImageGrid.Focus
-            flow="rhs"
+          <DiamondImageGrid
             images={[
-              { src: SITE_IMAGE.home.whoWeAre1, alt: '' },
-              { src: SITE_IMAGE.home.whoWeAre2, alt: '' },
-              { src: SITE_IMAGE.home.whoWeAre3, alt: '' },
+              { src: SITE_IMAGE.home.whoWeAre1.src, alt: '' },
+              { src: SITE_IMAGE.home.whoWeAre2.src, alt: '' },
+              { src: SITE_IMAGE.home.whoWeAre3.src, alt: '' },
             ]}
           />
         </div>
@@ -100,7 +101,7 @@ export default async function Home() {
         </div>
       </Container>
       <WaveDivider.homeBottom />
-      <Container className="mb-12 min-h-[40rem] h-max">
+      <Container className={cn('mb-12 min-h-[40rem] h-max', testimonials.length === 0 && 'hidden')}>
         <div className="flex flex-col gap-5">
           <div className="flex justify-center md:justify-start">
             <Title text="Testimonials" order="h2" underline="text-orange-600 rotate-12" />

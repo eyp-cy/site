@@ -134,6 +134,12 @@ export default {
     require('tailwindcss-animate'),
     plugin(function ({ addUtilities }) {
       addUtilities({
+        '.diamond-mask': {
+          maskImage: "url('/diamond-mask.svg')",
+          maskSize: 'contain',
+          maskRepeat: 'no-repeat',
+          maskPosition: 'center',
+        },
         '.--orange-500': {
           outline: '2px solid',
           outlineColor: '#f97316',

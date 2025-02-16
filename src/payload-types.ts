@@ -12,9 +12,9 @@ export interface Config {
   };
   collections: {
     users: User;
-    pages: Page;
     media: Media;
     events: Event;
+    member: Member;
     nc_member: NcMember;
     nc: Nc;
     partner: Partner;
@@ -28,9 +28,9 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    member: MemberSelect<false> | MemberSelect<true>;
     nc_member: NcMemberSelect<false> | NcMemberSelect<true>;
     nc: NcSelect<false> | NcSelect<true>;
     partner: PartnerSelect<false> | PartnerSelect<true>;
@@ -92,31 +92,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: number;
-  title?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -174,14 +149,24 @@ export interface SessionElement {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "member".
+ */
+export interface Member {
+  id: number;
+  fullName: string;
+  image: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nc_member".
  */
 export interface NcMember {
   id: number;
-  fullName: string;
+  member: number | Member;
   position: string;
   quote?: string | null;
-  image: number | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -251,16 +236,16 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null)
-    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'member';
+        value: number | Member;
       } | null)
     | ({
         relationTo: 'nc_member';
@@ -345,16 +330,6 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
- */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  content?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -398,13 +373,22 @@ export interface EventsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "member_select".
+ */
+export interface MemberSelect<T extends boolean = true> {
+  fullName?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nc_member_select".
  */
 export interface NcMemberSelect<T extends boolean = true> {
-  fullName?: T;
+  member?: T;
   position?: T;
   quote?: T;
-  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }

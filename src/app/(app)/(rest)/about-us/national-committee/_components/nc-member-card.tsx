@@ -3,18 +3,21 @@ import { NcMember } from '@/payload-types'
 
 import { toImageUrl } from '@/lib/utils/to-image-url'
 
-export function NCMemberCard({ member: { fullName, position, image } }: { member: NcMember }) {
+export function NCMemberCard({ ncMember }: { ncMember: NcMember }) {
+  const member = ncMember.member
+  if (typeof member === 'number') throw new Error('Member is a number')
+
   return (
     <div className="flex w-60 flex-col">
       <Image
         className="mb-4 h-60 w-60 rounded-full object-cover object-center"
         width={200}
         height={200}
-        src={toImageUrl(image)}
+        src={toImageUrl(member.image)}
         alt="..."
       />
-      <div className="mb-3 text-center text-lg">{fullName}</div>
-      <div className="break-normal text-center text-sm">{position}</div>
+      <div className="mb-3 text-center text-lg">{member.fullName}</div>
+      <div className="break-normal text-center text-sm">{ncMember.position}</div>
     </div>
   )
 }

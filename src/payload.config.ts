@@ -12,13 +12,13 @@ import {
   Media,
   NC_Members,
   NCs,
-  Pages,
   Partners,
   Patrons,
   SessionElements,
   Testimonials,
   Users,
 } from './collections'
+import { Members } from './collections/member'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,10 +34,10 @@ export default buildConfig({
   collections: [
     // --- Core  ---
     Users,
-    Pages,
     Media,
     // --- Custom  ---
     Events,
+    Members,
     NC_Members,
     NCs,
     Partners,

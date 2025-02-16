@@ -28,7 +28,7 @@ export default async function NationalCommittee() {
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-16">
           {nc.map((member, i) => (
-            <NCMemberCard key={i} member={member} />
+            <NCMemberCard key={i} ncMember={member} />
           ))}
         </div>
       </Container>

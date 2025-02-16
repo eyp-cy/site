@@ -67,28 +67,25 @@ function MobileNav() {
               </Link>
               <Drawer
                 mainItem={{ displayName: 'About Us', slug: 'about-us' }}
-                items={['Patrons & Partners', 'Impact', 'National Committee', 'EYP Network']}
+                items={[
+                  { displayName: 'Patrons & Partners', slug: 'patrons-and-partners' },
+                  { displayName: 'Impact', slug: 'impact' },
+                  { displayName: 'National Committee', slug: 'national-committee' },
+                  { displayName: 'EYP Network', slug: 'eyp-network' },
+                ]}
               />
               <Drawer
                 mainItem={{ displayName: 'Events', slug: 'events' }}
                 items={[
-                  'Pre-Selection Days',
-                  'Days of EYP',
-                  'Youth Summit',
-                  'National Session',
-                  'Other Events & Activities',
+                  {
+                    displayName: 'Pre-Selection Days',
+                    slug: encodeURIComponent('Pre-Selection Days'),
+                  },
+                  { displayName: 'Days of EYP', slug: encodeURIComponent('Days of EYP') },
+                  { displayName: 'Youth Summit', slug: encodeURIComponent('Youth Summit') },
+                  { displayName: 'National Session', slug: encodeURIComponent('National Session') },
                 ]}
               />
-              <Drawer
-                mainItem={{
-                  displayName: 'Members & Alumni',
-                  slug: encodeURIComponent('Members & Alumni'),
-                }}
-                items={['Schemes', 'Internal Affairs']}
-              />
-              <Link className="text-white text-2xl" href="/external-affairs">
-                External Relations
-              </Link>
               <Link className="text-white text-2xl" href="/get-involved">
                 Get Involved
               </Link>
@@ -103,36 +100,33 @@ function MobileNav() {
 function DesktopNav() {
   return (
     <div className="hidden lg:flex items-center justify-end gap-4 text-xl font-semibold text-white xl:gap-10">
-      {/* <a
+      <a
         href="/"
         className="cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
       >
         Home
-      </a> */}
+      </a>
       <Dropdown
         mainItem={{ displayName: 'About Us', slug: 'about-us' }}
-        items={['Patrons & Partners', 'Impact', 'National Committee', 'EYP Network']}
+        items={[
+          { displayName: 'Patrons & Partners', slug: 'patrons-and-partners' },
+          { displayName: 'Impact', slug: 'impact' },
+          { displayName: 'National Committee', slug: 'national-committee' },
+          { displayName: 'EYP Network', slug: 'eyp-network' },
+        ]}
       />
       <Dropdown
         mainItem={{ displayName: 'Events', slug: 'events' }}
         items={[
-          'Pre-Selection Days',
-          'Days of EYP',
-          'Youth Summit',
-          'National Session',
-          'Other Events & Activities',
+          {
+            displayName: 'Pre-Selection Days',
+            slug: encodeURIComponent('Pre-Selection Days'),
+          },
+          { displayName: 'Days of EYP', slug: encodeURIComponent('Days of EYP') },
+          { displayName: 'Youth Summit', slug: encodeURIComponent('Youth Summit') },
+          { displayName: 'National Session', slug: encodeURIComponent('National Session') },
         ]}
       />
-      <Dropdown
-        mainItem={{ displayName: 'Members & Alumni', slug: encodeURIComponent('Members & Alumni') }}
-        items={['Schemes', 'Internal Affairs']}
-      />
-      <a
-        className="cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
-        href="/external-affairs"
-      >
-        External Affairs
-      </a>
       <a
         className="cursor-pointer rounded-4xl bg-accent-900 px-6 py-3 text-black transition-all duration-300 hover:scale-[1.05] hover:rounded-2xl text-base"
         href="/get-involved"

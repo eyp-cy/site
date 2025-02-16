@@ -19,14 +19,19 @@ export function PreviousBoardButton({ nc }: { nc: Nc }) {
           <Title text={`National Committee ${year}`} order="h2" />
         </DialogHeader>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8">
-          {members.map((member, i) => (
-            <div key={i} className="flex flex-col gap-1 p-1">
-              <h3 className="text-base font-semibold text-slate-500 sm:text-lg">
-                {member.position}
-              </h3>
-              <h2 className="text-lg font-semibold sm:text-xl">{member.fullName}</h2>
-            </div>
-          ))}
+          {members
+            .map(
+              (member, i) =>
+                typeof member.member !== 'number' && (
+                  <div key={i} className="flex flex-col gap-1 p-1">
+                    <h3 className="text-base font-semibold text-slate-500 sm:text-lg">
+                      {member.position}
+                    </h3>
+                    <h2 className="text-lg font-semibold sm:text-xl">{member.member.fullName}</h2>
+                  </div>
+                ),
+            )
+            .filter(Boolean)}
         </div>
       </DialogContent>
     </Dialog>

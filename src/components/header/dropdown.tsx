@@ -1,15 +1,12 @@
-interface props {
-  mainItem: { displayName: string; slug: string }
-  items: string[]
-}
+import { UrlMetadata } from '@/lib/schemas/urls'
 
-export function Dropdown({ mainItem, items }: props) {
+export function Dropdown({ mainItem, items }: { mainItem: UrlMetadata; items: UrlMetadata[] }) {
   return (
     <>
       <div className="group relative inline-block">
         <a
           className="cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
-          href={`/${encodeURIComponent(mainItem.slug)}`}
+          href={`/${mainItem.slug}`}
         >
           {mainItem.displayName}
         </a>
@@ -19,9 +16,9 @@ export function Dropdown({ mainItem, items }: props) {
               <a
                 key={i}
                 className="block w-max cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
-                href={`/${encodeURIComponent(mainItem.slug)}/${encodeURIComponent(item)}`}
+                href={`/${mainItem.slug}/${item.slug}`}
               >
-                {item}
+                {item.displayName}
               </a>
             ))}
           </div>
