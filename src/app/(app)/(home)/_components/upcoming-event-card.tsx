@@ -33,8 +33,8 @@ export function UpcomingEventCard({
             </CardTitle>
             <CardDescription className="text-lg">
               {endDate
-                ? `${format(startDate, 'DD/MM/YY')} - ${format(endDate, 'DD/MM/YY')}`
-                : format(startDate, 'DD/MM/YY')}
+                ? `${format(startDate, 'dd/MM/YY')} - ${format(endDate, 'dd/MM/YY')}`
+                : format(startDate, 'dd/MM/YY')}
             </CardDescription>
           </CardHeader>
           <div className="ml-6 block xl:hidden mt-1 mb-2.5 h-1 w-8 bg-orange-500">&nbsp;</div>
