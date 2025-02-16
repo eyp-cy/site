@@ -15,7 +15,7 @@ export function UpcomingEventCard({
   event: Event
 }) {
   return (
-    <CoreEventCardLink eventTitle={encodeURIComponent(title)}>
+    <CoreEventCardLink eventTitle={title}>
       <Card className="max-w-lg w-full xl:max-w-none shrink-0 border-none cursor-default group xl:w-72 flex flex-col overflow-hidden rounded-2xl bg-slate-100 shadow-lg transition-all duration-300 hover:scale-[1.02]">
         <Image
           width={200}
@@ -33,8 +33,8 @@ export function UpcomingEventCard({
             </CardTitle>
             <CardDescription className="text-lg">
               {endDate
-                ? `${format(startDate, 'dd/MM/YY')} - ${format(endDate, 'dd/MM/YY')}`
-                : format(startDate, 'dd/MM/YY')}
+                ? `${format(startDate, 'dd/MM/yy')} - ${format(endDate, 'dd/MM/yy')}`
+                : format(startDate, 'dd/MM/yy')}
             </CardDescription>
           </CardHeader>
           <div className="ml-6 block xl:hidden mt-1 mb-2.5 h-1 w-8 bg-orange-500">&nbsp;</div>
@@ -65,13 +65,15 @@ function CoreEventCardLink({ eventTitle, children }: { eventTitle: string; child
     !Object.values(CORE_EVENTS)
       .map((e) => e.title)
       .includes(eventTitle)
-  )
+  ) {
+    console.log(eventTitle, 'not a core event')
     return children
+  }
 
   return (
     <Link
       className="block xl:flex cursor-pointer shrink-0 group max-w-lg xl:w-72"
-      href={encodeURIComponent(eventTitle)}
+      href={`/events/${encodeURIComponent(eventTitle)}`}
     >
       {children}
     </Link>

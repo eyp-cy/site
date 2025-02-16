@@ -120,7 +120,6 @@ export interface Event {
   shortDescription: string;
   startDate: string;
   endDate?: string | null;
-  url?: string | null;
   logo?: (number | null) | Media;
   cardImage: number | Media;
   actionText?: string | null;
@@ -356,7 +355,6 @@ export interface EventsSelect<T extends boolean = true> {
   shortDescription?: T;
   startDate?: T;
   endDate?: T;
-  url?: T;
   logo?: T;
   cardImage?: T;
   actionText?: T;
