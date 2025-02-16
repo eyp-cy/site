@@ -4,7 +4,7 @@ import { Container, Divider, Title } from '@/components'
 import { ORG_NAME } from '@/content/config'
 import { toImageUrl } from '@/lib/utils/to-image-url'
 import { SessionElementCard } from '../_components'
-import { getEventBySlug, getEvents } from '../_content'
+import { getEventBySlug } from '../_content'
 
 // export const revalidate = 3600
 // export const dynamicParams = true
@@ -31,7 +31,13 @@ export default async function Page({ params }: { params: PageParams }) {
     <>
       <Container className="mt-40 md:mt-20 lg:mt-16 flex justify-center">
         <div className="flex flex-col items-center gap-5 w-5/6 xl:w-2/3">
-          <Image className="mb-5 w-48 md-lg:w-60" width={200} height={200} src={''} alt="" />
+          <Image
+            className="mb-5 w-48 md-lg:w-60"
+            width={200}
+            height={200}
+            src={toImageUrl(event.logo)}
+            alt=""
+          />
           <div className="flex justify-center">
             <Title text={event.title} order="h1" />
           </div>

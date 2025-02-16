@@ -38,11 +38,6 @@ export const Events: CollectionConfig = {
       required: false,
     },
     {
-      name: 'url',
-      type: 'text',
-      required: false,
-    },
-    {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',

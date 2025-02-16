@@ -6,14 +6,16 @@ import { ReactNode } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { toImageUrl } from '@/lib/utils/to-image-url'
+import { CORE_EVENTS } from '@/content/core-events'
+import { format } from 'date-fns'
 
 export function UpcomingEventCard({
-  event: { title, startDate, shortDescription, cardImage, actionText, actionUrl },
+  event: { title, startDate, endDate, shortDescription, cardImage, actionText, actionUrl },
 }: {
   event: Event
 }) {
   return (
-    <Wrapper hasAction={!!actionText} actionURL={actionUrl ?? ''}>
+    <CoreEventCardLink eventTitle={encodeURIComponent(title)}>
       <Card className="max-w-lg w-full xl:max-w-none shrink-0 border-none cursor-default group xl:w-72 flex flex-col overflow-hidden rounded-2xl bg-slate-100 shadow-lg transition-all duration-300 hover:scale-[1.02]">
         <Image
           width={200}
@@ -29,7 +31,11 @@ export function UpcomingEventCard({
                 {title}
               </span>
             </CardTitle>
-            <CardDescription className="text-lg">{startDate}</CardDescription>
+            <CardDescription className="text-lg">
+              {endDate
+                ? `${format(startDate, 'DD/MM/YY')} - ${format(endDate, 'DD/MM/YY')}`
+                : format(startDate, 'DD/MM/YY')}
+            </CardDescription>
           </CardHeader>
           <div className="ml-6 block xl:hidden mt-1 mb-2.5 h-1 w-8 bg-orange-500">&nbsp;</div>
           <CardContent className="flex flex-col justify-between">
@@ -50,23 +56,23 @@ export function UpcomingEventCard({
           </CardContent>
         </div>
       </Card>
-    </Wrapper>
+    </CoreEventCardLink>
   )
 }
 
-function Wrapper({
-  hasAction,
-  actionURL,
-  children,
-}: {
-  hasAction: boolean
-  actionURL: string
-  children: ReactNode
-}) {
-  if (hasAction) return children
+function CoreEventCardLink({ eventTitle, children }: { eventTitle: string; children: ReactNode }) {
+  if (
+    !Object.values(CORE_EVENTS)
+      .map((e) => e.title)
+      .includes(eventTitle)
+  )
+    return children
 
   return (
-    <Link className="block xl:flex cursor-pointer shrink-0 group max-w-lg xl:w-72" href={actionURL}>
+    <Link
+      className="block xl:flex cursor-pointer shrink-0 group max-w-lg xl:w-72"
+      href={encodeURIComponent(eventTitle)}
+    >
       {children}
     </Link>
   )
