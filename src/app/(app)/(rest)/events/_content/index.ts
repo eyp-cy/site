@@ -17,11 +17,28 @@ export async function getCoreEvents() {
     description: event.shortDescription,
   }))
 
+  const EYP_DAY_EVENT = eventData.find((event) => event.title === CORE_EVENTS.DAYS_OF_EYP.title)
+  const PRE_SELECTION_EVENT = eventData.find(
+    (event) => event.title === CORE_EVENTS.PRE_SELECTION_DAYS.title,
+  )
+
+  const NATIONAL_SESSION_EVENT = eventData.find(
+    (event) => event.title === CORE_EVENTS.NATIONAL_SESSION.title,
+  )
+
+  const YOUTH_SUMMIT_EVENT = eventData.find(
+    (event) => event.title === CORE_EVENTS.YOUTH_SUMMIT.title,
+  )
+
+  if (!EYP_DAY_EVENT || !PRE_SELECTION_EVENT || !NATIONAL_SESSION_EVENT || !YOUTH_SUMMIT_EVENT) {
+    throw new Error('Missing core event from database!')
+  }
+
   return {
-    [CORE_EVENTS.DAYS_OF_EYP.id]: eventData[0],
-    [CORE_EVENTS.PRE_SELECTION_DAYS.id]: eventData[2],
-    [CORE_EVENTS.NATIONAL_SESSION.id]: eventData[1],
-    [CORE_EVENTS.YOUTH_SUMMIT.id]: eventData[3],
+    [CORE_EVENTS.DAYS_OF_EYP.id]: EYP_DAY_EVENT,
+    [CORE_EVENTS.PRE_SELECTION_DAYS.id]: PRE_SELECTION_EVENT,
+    [CORE_EVENTS.NATIONAL_SESSION.id]: NATIONAL_SESSION_EVENT,
+    [CORE_EVENTS.YOUTH_SUMMIT.id]: YOUTH_SUMMIT_EVENT,
   }
 }
 

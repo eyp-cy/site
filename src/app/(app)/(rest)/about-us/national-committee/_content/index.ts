@@ -9,6 +9,7 @@ export async function getCurrentNCMembers() {
   const currentNc = await payload.find({
     collection: 'nc',
     where: { year: { equals: currentYear } },
+    depth: 3,
   })
   return (
     currentNc.docs
@@ -25,6 +26,7 @@ export async function getPreviousNCs() {
     collection: 'nc',
     where: { year: { not_equals: currentYear } },
     sort: '-year',
+    depth: 3,
   })
 
   return ncs.docs

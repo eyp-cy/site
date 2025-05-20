@@ -7,6 +7,7 @@ export function NCMemberCard({ ncMember }: { ncMember: NcMember }) {
   const member = ncMember.member
   if (typeof member === 'number') throw new Error('Member is a number')
 
+  console.log('NCMemberCard', member)
   return (
     <div className="flex w-60 flex-col">
       <Image

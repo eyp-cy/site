@@ -12,6 +12,9 @@ export default async function Page() {
   const events = await getCoreEvents()
   const sessionElements = await getSessionElements()
 
+  console.log('events', events)
+  console.log('sessionElements', sessionElements)
+
   return (
     <>
       <Container className="mb-20 xl:mb-10 mt-40 md:mt-20 lg:mt-16 flex flex-col items-center">
