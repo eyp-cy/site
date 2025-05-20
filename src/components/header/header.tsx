@@ -74,18 +74,21 @@ function MobileNav() {
                   { displayName: 'EYP Network', slug: 'eyp-network' },
                 ]}
               />
-              <Drawer
+              <Link className="text-white text-2xl" href="/events">
+                Events
+              </Link>
+              {/* <Drawer
                 mainItem={{ displayName: 'Events', slug: 'events' }}
                 items={[
-                  // {
-                  //   displayName: 'Pre-Selection Days',
-                  //   slug: encodeURIComponent('Pre-Selection Days'),
-                  // },
-                  // { displayName: 'Days of EYP', slug: encodeURIComponent('Days of EYP') },
+                  {
+                    displayName: 'Pre-Selection Days',
+                    slug: encodeURIComponent('Pre-Selection Days'),
+                  },
+                  { displayName: 'Days of EYP', slug: encodeURIComponent('Days of EYP') },
                   { displayName: 'Youth Summit', slug: encodeURIComponent('Youth Summit') },
                   { displayName: 'National Session', slug: encodeURIComponent('National Session') },
                 ]}
-              />
+              /> */}
               <Link className="text-white text-2xl" href="/get-involved">
                 Get Involved
               </Link>
@@ -115,7 +118,13 @@ function DesktopNav() {
           { displayName: 'EYP Network', slug: 'eyp-network' },
         ]}
       />
-      <Dropdown
+      <a
+        href="/events"
+        className="cursor-pointer rounded-xl px-5 py-2 hover:bg-accent-900 hover:text-black text-base"
+      >
+        Events
+      </a>
+      {/* <Dropdown
         mainItem={{ displayName: 'Events', slug: 'events' }}
         items={[
           {
@@ -126,7 +135,7 @@ function DesktopNav() {
           { displayName: 'Youth Summit', slug: encodeURIComponent('Youth Summit') },
           { displayName: 'National Session', slug: encodeURIComponent('National Session') },
         ]}
-      />
+      /> */}
       <a
         className="cursor-pointer rounded-4xl bg-accent-900 px-6 py-3 text-black transition-all duration-300 hover:scale-[1.05] hover:rounded-2xl text-base"
         href="/get-involved"
