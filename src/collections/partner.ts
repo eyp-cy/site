@@ -26,6 +26,7 @@ export const Partners: CollectionConfig = {
     {
       name: 'description',
       type: 'text',
+      defaultValue: undefined,
       required: true,
     },
   ],

@@ -36,6 +36,7 @@ export const Events: CollectionConfig = {
         { label: 'National Session', value: CoreEventTypes.NATIONAL_SESSION },
         { label: 'Youth Summit', value: CoreEventTypes.YOUTH_SUMMIT },
       ],
+      defaultValue: undefined,
       required: false,
     },
     {
