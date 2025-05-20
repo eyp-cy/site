@@ -23,5 +23,10 @@ export const Partners: CollectionConfig = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'description',
+      type: 'text',
+      required: true,
+    },
   ],
 }

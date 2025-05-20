@@ -193,6 +193,7 @@ export interface Partner {
   id: number;
   name: string;
   image: number | Media;
+  description: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -412,6 +413,7 @@ export interface NcSelect<T extends boolean = true> {
 export interface PartnerSelect<T extends boolean = true> {
   name?: T;
   image?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
