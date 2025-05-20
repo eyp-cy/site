@@ -24,25 +24,33 @@ export default async function Page() {
         <div className="flex shrink mt-20 flex-col items-center gap-16 xl:grid xl:grid-cols-12 xl:grid-rows-4">
           {Object.values(events).filter(Boolean).length === 4 && (
             <>
-              <EventTypeCard
-                className=" col-span-9 col-start-1 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-                event={events[CORE_EVENTS.PRE_SELECTION_DAYS.id]}
-              />
+              {events[CORE_EVENTS.PRE_SELECTION_DAYS.id] && (
+                <EventTypeCard
+                  className=" col-span-9 col-start-1 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                  event={events[CORE_EVENTS.PRE_SELECTION_DAYS.id]!}
+                />
+              )}
 
-              <EventTypeCard
-                className=" col-span-9 col-start-2 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-                event={events[CORE_EVENTS.DAYS_OF_EYP.id]}
-              />
+              {events[CORE_EVENTS.DAYS_OF_EYP.id] && (
+                <EventTypeCard
+                  className=" col-span-9 col-start-2 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                  event={events[CORE_EVENTS.DAYS_OF_EYP.id]!}
+                />
+              )}
 
-              <EventTypeCard
-                className=" col-span-9 col-start-3 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-                event={events[CORE_EVENTS.YOUTH_SUMMIT.id]}
-              />
+              {events[CORE_EVENTS.YOUTH_SUMMIT.id] && (
+                <EventTypeCard
+                  className=" col-span-9 col-start-3 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                  event={events[CORE_EVENTS.YOUTH_SUMMIT.id]!}
+                />
+              )}
 
-              <EventTypeCard
-                className=" col-span-9 col-start-4 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
-                event={events[CORE_EVENTS.NATIONAL_SESSION.id]}
-              />
+              {events[CORE_EVENTS.NATIONAL_SESSION.id] && (
+                <EventTypeCard
+                  className=" col-span-9 col-start-4 row-span-1 xl:max-w-4xl 2xl:max-w-5xl"
+                  event={events[CORE_EVENTS.NATIONAL_SESSION.id]!}
+                />
+              )}
             </>
           )}
         </div>

@@ -116,6 +116,7 @@ export interface Media {
 export interface Event {
   id: number;
   title: string;
+  coreEventType?: ('days-of-eyp' | 'pre-selection-days' | 'national-session' | 'youth-summit') | null;
   longDescription?: string | null;
   shortDescription: string;
   startDate: string;
@@ -352,6 +353,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
+  coreEventType?: T;
   longDescription?: T;
   shortDescription?: T;
   startDate?: T;
