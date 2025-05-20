@@ -20,7 +20,7 @@ export function PartnerCard({ partner }: { partner: Partner }) {
       />
       <div className="flex w-60 flex-col gap-5">
         <h2 className="text-xl sm:text-2xl font-bold text-primary-700">{partner.name}</h2>
-        <p className="text-lg">{'Find out more about our collaboration!'}</p>
+        <p className="text-lg">{partner.description}</p>
       </div>
     </div>
   )
