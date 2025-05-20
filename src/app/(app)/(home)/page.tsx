@@ -103,20 +103,19 @@ export default async function Home() {
               underline="text-orange-600 rotate-12"
             />
           </div>
-          The European Youth Parliament (EYP) is one of Europe’s largest platforms for political
-          debate, intercultural dialogue, and civic education among young people. Present in 40
-          European countries, the network brings together thousands of young volunteers who organise
-          nearly 600 events and 1,500 days of activity each year.
-          <br />
-          <br />
-          With a mission to inspire open-minded, tolerant, and active citizenship, EYP empowers
-          young people to exchange ideas, develop their skills, and engage meaningfully with the
-          world around them. From local initiatives to international sessions, the network fosters
-          spaces where youth can lead, learn, and connect across borders.
-          <br />
-          <br />
-          The Berlin-based Schwarzkopf Foundation Young Europe serves as the international umbrella
-          organisation of the EYP, supporting the coordination and vision of the network.
+          <p className=" text-justify text-lg leading-relaxed md:text-xl">
+            The European Youth Parliament (EYP) is one of Europe’s largest platforms for political
+            debate, intercultural dialogue, and civic education among young people. Present in 40
+            European countries, the network brings together thousands of young volunteers who
+            organise nearly 600 events and 1,500 days of activity each year.With a mission to
+            inspire open-minded, tolerant, and active citizenship, EYP empowers young people to
+            exchange ideas, develop their skills, and engage meaningfully with the world around
+            them. From local initiatives to international sessions, the network fosters spaces where
+            youth can lead, learn, and connect across borders.The Berlin-based Schwarzkopf
+            Foundation Young Europe serves as the international umbrella organisation of the EYP,
+            supporting the coordination and vision of the network.
+          </p>
+
           {/* <div className="flex flex-col gap-10 lg:hidden">
             {testimonials.map((testimonial, testimonialIndex) => (
               <TestimonialCard key={testimonialIndex} testimonial={testimonial} />
