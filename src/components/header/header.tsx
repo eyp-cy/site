@@ -77,11 +77,11 @@ function MobileNav() {
               <Drawer
                 mainItem={{ displayName: 'Events', slug: 'events' }}
                 items={[
-                  {
-                    displayName: 'Pre-Selection Days',
-                    slug: encodeURIComponent('Pre-Selection Days'),
-                  },
-                  { displayName: 'Days of EYP', slug: encodeURIComponent('Days of EYP') },
+                  // {
+                  //   displayName: 'Pre-Selection Days',
+                  //   slug: encodeURIComponent('Pre-Selection Days'),
+                  // },
+                  // { displayName: 'Days of EYP', slug: encodeURIComponent('Days of EYP') },
                   { displayName: 'Youth Summit', slug: encodeURIComponent('Youth Summit') },
                   { displayName: 'National Session', slug: encodeURIComponent('National Session') },
                 ]}
