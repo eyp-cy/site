@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
 
 import { ActionButton, Container, Title, WaveDivider } from '@/components'
-import { EventTypeCard, SessionElementCard } from './_components'
+import { SessionElementCard } from './_components'
 import { CoreSessionElement, getCoreEvents, getSessionElements } from './_content'
-import { CORE_EVENTS } from '@/content/core-events'
 
 export const metadata: Metadata = { title: 'Events' }
 export const dynamic = 'force-dynamic'
@@ -21,7 +20,24 @@ export default async function Page() {
         <div className=" mb-10 md:mb-3 flex justify-center lg:justify-start">
           <Title text="Our Flagship Events" order="h1" />
         </div>
-        <div className="flex shrink mt-20 flex-col items-center gap-16 xl:grid xl:grid-cols-12 xl:grid-rows-4">
+        <p className=" text-justify text-lg leading-relaxed md:text-xl">
+          The European Youth Parliament Cyprus organises various events aimed both at: engaging
+          young people who have never participated in the activities of our organisation before; and
+          activities which aim to include and engage past alumni, and broaden their skills.
+          <br />
+          <br />
+          Through its sessions the EYP aims at promoting active European citizenship, intercultural
+          dialogue and European values. Sessions increase the participants&apos; knowledge about
+          Europe&apos;s cultural diversity, prepare them for active participation in society,
+          contribute to the development of their personal skills and provide a forum for debate and
+          reflection on current topics of European politics The main type of event in the European
+          Youth Parliament (EYP) are conferences, referred to as ‘Sessions’ and comprising 3 main
+          elements: Teambuilding, Committee Work, and the General Assembly. In EYP Cyprus, we also
+          strive to include further activities within our Sessions, in order to ensure that
+          participants’ attendance is as academically stimulating, and engaging as possible. Below
+          is a summary of the main elements of our organisation’s sessions.
+        </p>
+        {/* <div className="flex shrink mt-20 flex-col items-center gap-16 xl:grid xl:grid-cols-12 xl:grid-rows-4">
           {Object.values(events).filter(Boolean).length === 4 && (
             <>
               {events[CORE_EVENTS.PRE_SELECTION_DAYS.id] && (
@@ -52,8 +68,8 @@ export default async function Page() {
                 />
               )}
             </>
-          )}
-        </div>
+          )} 
+        </div> */}
         {/* <div className="mt-40 mb-10 md:mb-3 flex justify-center lg:justify-start">
           <Title text="Other Events and Activities" order="h2" />
         </div> */}
