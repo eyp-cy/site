@@ -53,7 +53,7 @@ export default async function Home() {
             The European Youth Parliament (EYP) is a non-partisan and independent educational
             platform bringing together thousands of young people from all over Europe to discuss
             current issues, develop their skills through dialogue and cooperation, as well as
-            empower them to positively shape the world around them..
+            empower them to positively shape the world around them. hello
             <br />
             <br />
             The European Youth Parliament Cyprus is a non-governmental, non-partisan organisation
