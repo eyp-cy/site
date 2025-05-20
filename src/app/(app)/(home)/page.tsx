@@ -2,14 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { Container, Title, WaveDivider } from '@/components'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
-import { TestimonialCard, UpcomingEventCard } from './_components'
+import { UpcomingEventCard } from './_components'
 import { getTestimonials, getUpcomingEvents } from './_content'
 import { SITE_IMAGE } from '@/content/images'
 import { cn } from '@/lib/utils'
@@ -101,12 +94,30 @@ export default async function Home() {
         </div>
       </Container>
       <WaveDivider.homeBottom />
-      <Container className={cn('mb-12 min-h-[40rem] h-max', testimonials.length === 0 && 'hidden')}>
+      <Container className={cn('mb-12 min-h-[40rem] h-max')}>
         <div className="flex flex-col gap-5">
           <div className="flex justify-center md:justify-start">
-            <Title text="Testimonials" order="h2" underline="text-orange-600 rotate-12" />
+            <Title
+              text="Empowering Youth Across Europe"
+              order="h2"
+              underline="text-orange-600 rotate-12"
+            />
           </div>
-          <div className="flex flex-col gap-10 lg:hidden">
+          The European Youth Parliament (EYP) is one of Europe’s largest platforms for political
+          debate, intercultural dialogue, and civic education among young people. Present in 40
+          European countries, the network brings together thousands of young volunteers who organise
+          nearly 600 events and 1,500 days of activity each year.
+          <br />
+          <br />
+          With a mission to inspire open-minded, tolerant, and active citizenship, EYP empowers
+          young people to exchange ideas, develop their skills, and engage meaningfully with the
+          world around them. From local initiatives to international sessions, the network fosters
+          spaces where youth can lead, learn, and connect across borders.
+          <br />
+          <br />
+          The Berlin-based Schwarzkopf Foundation Young Europe serves as the international umbrella
+          organisation of the EYP, supporting the coordination and vision of the network.
+          {/* <div className="flex flex-col gap-10 lg:hidden">
             {testimonials.map((testimonial, testimonialIndex) => (
               <TestimonialCard key={testimonialIndex} testimonial={testimonial} />
             ))}
@@ -121,7 +132,7 @@ export default async function Home() {
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
-          </Carousel>
+          </Carousel> */}
         </div>
       </Container>
     </>
