@@ -22,7 +22,7 @@ export default function AboutUs() {
             intercultural encounters amongst the young people of Cyprus. EYP Cyprus is one of the 40
             European organisations that operate as part of the pan-European network of EYP
             International. The organisation was founded in 2006 and over the years has organised
-            over 150 events with more than 3,500 young people being involved in the activities and
+            over 100 events with more than 3,500 young people being involved in the activities and
             workings of the organisation.
           </p>
         </div>
